@@ -1,0 +1,207 @@
+The json file has been saved!
+The shell file has been saved!
+
+-  Building for production...
+ DONE  Compiled successfully in 23381ms11:16:49 AM
+
+  File                                      Size             Gzipped
+
+  ../build/sysroot/var/lib/casaos/www/10    3344.36 KiB      734.77 KiB
+  .e443f4f7.js
+  ../build/sysroot/var/lib/casaos/www/ve    3082.27 KiB      610.10 KiB
+  ndors~app.34dfbb9e.js
+  ../build/sysroot/var/lib/casaos/www/9.    2573.78 KiB      145.17 KiB
+  902a2c74.js
+  ../build/sysroot/var/lib/casaos/www/mo    2328.72 KiB      467.22 KiB
+  dules/icewhale_files/vendors~app.7b305
+  b3c.js
+  ../build/sysroot/var/lib/casaos/www/2.    2274.82 KiB      492.59 KiB
+  2629f58a.js
+  ../build/sysroot/var/lib/casaos/www/mo    1796.02 KiB      181.39 KiB
+  dules/icewhale_files/app.036d1d3b.js
+  ../build/sysroot/var/lib/casaos/www/3.    1737.46 KiB      460.13 KiB
+  9c826950.js
+  ../build/sysroot/var/lib/casaos/www/11    1156.66 KiB      221.93 KiB
+  .62a47331.js
+  ../build/sysroot/var/lib/casaos/www/mo    1041.88 KiB      252.50 KiB
+  dules/icewhale_files/1.0aa3342f.js
+  ../build/sysroot/var/lib/casaos/www/ap    982.83 KiB       137.71 KiB
+  p.2b3bae74.js
+  ../build/sysroot/var/lib/casaos/www/1.    641.27 KiB       117.70 KiB
+  26b15e17.js
+  ../build/sysroot/var/lib/casaos/www/4.    636.96 KiB       53.50 KiB
+  e360bbf5.js
+  ../build/sysroot/var/lib/casaos/www/31    510.26 KiB       131.08 KiB
+  .e17ecbc0.js
+  ../build/sysroot/var/lib/casaos/www/0.    390.92 KiB       80.76 KiB
+  2dd2d12f.js
+  ../build/sysroot/var/lib/casaos/www/12    288.10 KiB       67.33 KiB
+  .483a8a73.js
+  ../build/sysroot/var/lib/casaos/www/6.    249.45 KiB       67.74 KiB
+  20b6b146.js
+  ../build/sysroot/var/lib/casaos/www/mo    247.74 KiB       67.24 KiB
+  dules/icewhale_files/0.1e861d38.js
+  ../build/sysroot/var/lib/casaos/www/mo    177.87 KiB       54.33 KiB
+  dules/icewhale_files/15.7924dc86.js
+  ../build/sysroot/var/lib/casaos/www/32    177.79 KiB       54.27 KiB
+  .d0de4dec.js
+  ../build/sysroot/var/lib/casaos/www/mo    164.31 KiB       49.09 KiB
+  dules/icewhale_files/12.97b7cb3e.js
+  ../build/sysroot/var/lib/casaos/www/29    161.88 KiB       48.40 KiB
+  .f264a3d0.js
+  ../build/sysroot/var/lib/casaos/www/mo    130.56 KiB       26.37 KiB
+  dules/icewhale_files/13.fbfc710d.js
+  ../build/sysroot/var/lib/casaos/www/28    130.41 KiB       26.31 KiB
+  .c97d8c93.js
+  ../build/sysroot/var/lib/casaos/www/26    62.92 KiB        9.58 KiB
+  .2bcb593d.js
+  ../build/sysroot/var/lib/casaos/www/mo    59.10 KiB        10.10 KiB
+  dules/icewhale_files/2.acd83826.js
+  ../build/sysroot/var/lib/casaos/www/19    57.24 KiB        9.58 KiB
+  .8ee1bf34.js
+  ../build/sysroot/var/lib/casaos/www/mo    56.95 KiB        9.42 KiB
+  dules/icewhale_files/6.65893506.js
+  ../build/sysroot/var/lib/casaos/www/15    50.60 KiB        6.84 KiB
+  .45e9f0a0.js
+  ../build/sysroot/var/lib/casaos/www/7.    46.09 KiB        11.61 KiB
+  ba6d8217.js
+  ../build/sysroot/var/lib/casaos/www/mo    43.35 KiB        5.45 KiB
+  dules/icewhale_files/3.3382c784.js
+  ../build/sysroot/var/lib/casaos/www/mo    39.60 KiB        4.67 KiB
+  dules/icewhale_files/10.8284a0ee.js
+  ../build/sysroot/var/lib/casaos/www/18    35.91 KiB        4.90 KiB
+  .98eb74b0.js
+  ../build/sysroot/var/lib/casaos/www/14    34.84 KiB        4.90 KiB
+  .1cb8e3dd.js
+  ../build/sysroot/var/lib/casaos/www/13    34.07 KiB        5.29 KiB
+  .8034532c.js
+  ../build/sysroot/var/lib/casaos/www/17    33.95 KiB        4.32 KiB
+  .49d2394e.js
+  ../build/sysroot/var/lib/casaos/www/5.    33.10 KiB        4.14 KiB
+  ad16460b.js
+  ../build/sysroot/var/lib/casaos/www/16    30.96 KiB        3.95 KiB
+  .bd1e8aed.js
+  ../build/sysroot/var/lib/casaos/www/24    29.63 KiB        3.49 KiB
+  .ac4d4f8c.js
+  ../build/sysroot/var/lib/casaos/www/mo    28.44 KiB        3.13 KiB
+  dules/icewhale_files/4.1c14596c.js
+  ../build/sysroot/var/lib/casaos/www/mo    28.20 KiB        3.00 KiB
+  dules/icewhale_files/8.5486314a.js
+  ../build/sysroot/var/lib/casaos/www/23    27.87 KiB        2.96 KiB
+  .9df83648.js
+  ../build/sysroot/var/lib/casaos/www/mo    27.69 KiB        3.23 KiB
+  dules/icewhale_files/9.b0130df5.js
+  ../build/sysroot/var/lib/casaos/www/20    27.69 KiB        3.04 KiB
+  .1711ae6b.js
+  ../build/sysroot/var/lib/casaos/www/25    27.36 KiB        3.19 KiB
+  .503dfb3c.js
+  ../build/sysroot/var/lib/casaos/www/8.    27.35 KiB        9.51 KiB
+  befcb5ef.js
+  ../build/sysroot/var/lib/casaos/www/mo    26.01 KiB        2.31 KiB
+  dules/icewhale_files/7.51ae323b.js
+  ../build/sysroot/var/lib/casaos/www/mo    25.93 KiB        2.26 KiB
+  dules/icewhale_files/5.cf0ab41b.js
+  ../build/sysroot/var/lib/casaos/www/21    25.69 KiB        2.27 KiB
+  .f9b2c18f.js
+  ../build/sysroot/var/lib/casaos/www/22    25.17 KiB        2.17 KiB
+  .a043a83a.js
+  ../build/sysroot/var/lib/casaos/www/mo    22.52 KiB        3.16 KiB
+  dules/icewhale_files/11.f344a0a2.js
+  ../build/sysroot/var/lib/casaos/www/27    22.27 KiB        3.12 KiB
+  .ee428145.js
+  ../build/sysroot/var/lib/casaos/www/mo    13.21 KiB        4.38 KiB
+  dules/icewhale_files/16.2d1b9f5f.js
+  ../build/sysroot/var/lib/casaos/www/mo    0.57 KiB         0.29 KiB
+  dules/icewhale_files/14.766e3ec5.js
+  ../build/sysroot/var/lib/casaos/www/30    0.50 KiB         0.26 KiB
+  .315cf581.js
+  ../build/sysroot/var/lib/casaos/www/mo    493.91 KiB       63.01 KiB
+  dules/icewhale_files/css/app.1694b9a4.
+  css
+  ../build/sysroot/var/lib/casaos/www/cs    482.40 KiB       61.65 KiB
+  s/app.b49dc721.css
+  ../build/sysroot/var/lib/casaos/www/mo    355.25 KiB       67.14 KiB
+  dules/icewhale_files/css/vendors~app.a
+  4a4c082.css
+  ../build/sysroot/var/lib/casaos/www/cs    343.25 KiB       61.95 KiB
+  s/vendors~app.0af548eb.css
+  ../build/sysroot/var/lib/casaos/www/cs    67.92 KiB        8.35 KiB
+  s/9.00a92a7c.css
+  ../build/sysroot/var/lib/casaos/www/cs    54.41 KiB        17.00 KiB
+  s/3.23d12ff2.css
+  ../build/sysroot/var/lib/casaos/www/cs    51.55 KiB        3.86 KiB
+  s/animate.min.css
+  ../build/sysroot/var/lib/casaos/www/mo    34.12 KiB        5.09 KiB
+  dules/icewhale_files/css/14.1bff97f0.c
+  ss
+  ../build/sysroot/var/lib/casaos/www/cs    34.02 KiB        5.09 KiB
+  s/30.f57ffe1a.css
+  ../build/sysroot/var/lib/casaos/www/cs    20.05 KiB        3.23 KiB
+  s/4.e6e4070d.css
+  ../build/sysroot/var/lib/casaos/www/cs    12.45 KiB        3.37 KiB
+  s/10.1f22dd85.css
+  ../build/sysroot/var/lib/casaos/www/mo    9.77 KiB         2.29 KiB
+  dules/icewhale_files/css/1.f0ef0273.cs
+  s
+  ../build/sysroot/var/lib/casaos/www/cs    7.44 KiB         2.95 KiB
+  s/28.f01561ee.css
+  ../build/sysroot/var/lib/casaos/www/mo    7.44 KiB         2.95 KiB
+  dules/icewhale_files/css/13.59d6b514.c
+  ss
+  ../build/sysroot/var/lib/casaos/www/cs    3.84 KiB         0.99 KiB
+  s/20.7591c551.css
+  ../build/sysroot/var/lib/casaos/www/mo    3.81 KiB         0.97 KiB
+  dules/icewhale_files/css/4.3ef1e512.cs
+  s
+  ../build/sysroot/var/lib/casaos/www/cs    3.39 KiB         1.03 KiB
+  s/2.a80ee85b.css
+  ../build/sysroot/var/lib/casaos/www/cs    3.26 KiB         1.15 KiB
+  s/18.8c7a95d1.css
+  ../build/sysroot/var/lib/casaos/www/mo    3.23 KiB         1.14 KiB
+  dules/icewhale_files/css/3.5ec6376e.cs
+  s
+  ../build/sysroot/var/lib/casaos/www/cs    2.83 KiB         0.80 KiB
+  s/12.0a083530.css
+  ../build/sysroot/var/lib/casaos/www/cs    2.48 KiB         0.86 KiB
+  s/14.da259fc2.css
+  ../build/sysroot/var/lib/casaos/www/cs    2.26 KiB         0.78 KiB
+  s/5.6e6db39c.css
+  ../build/sysroot/var/lib/casaos/www/cs    2.05 KiB         0.76 KiB
+  s/15.b6f5c354.css
+  ../build/sysroot/var/lib/casaos/www/cs    1.92 KiB         0.70 KiB
+  s/17.377088f9.css
+  ../build/sysroot/var/lib/casaos/www/cs    1.73 KiB         0.65 KiB
+  s/19.a896b659.css
+  ../build/sysroot/var/lib/casaos/www/mo    1.68 KiB         0.63 KiB
+  dules/icewhale_files/css/6.e235f749.cs
+  s
+  ../build/sysroot/var/lib/casaos/www/cs    1.55 KiB         0.68 KiB
+  s/24.e053bd7c.css
+  ../build/sysroot/var/lib/casaos/www/cs    1.28 KiB         0.53 KiB
+  s/21.930675e2.css
+  ../build/sysroot/var/lib/casaos/www/mo    1.23 KiB         0.52 KiB
+  dules/icewhale_files/css/7.9fefacaf.cs
+  s
+  ../build/sysroot/var/lib/casaos/www/cs    1.19 KiB         0.52 KiB
+  s/22.d8665c50.css
+  ../build/sysroot/var/lib/casaos/www/mo    1.14 KiB         0.50 KiB
+  dules/icewhale_files/css/5.52e997f5.cs
+  s
+  ../build/sysroot/var/lib/casaos/www/cs    1.13 KiB         0.46 KiB
+  s/16.bc7b2540.css
+  ../build/sysroot/var/lib/casaos/www/cs    1.08 KiB         0.44 KiB
+  s/23.d9645cdf.css
+  ../build/sysroot/var/lib/casaos/www/mo    1.02 KiB         0.43 KiB
+  dules/icewhale_files/css/8.de154068.cs
+  s
+  ../build/sysroot/var/lib/casaos/www/mo    0.18 KiB         0.11 KiB
+  dules/icewhale_files/css/9.c9df7d9b.cs
+  s
+  ../build/sysroot/var/lib/casaos/www/cs    0.14 KiB         0.10 KiB
+  s/25.afbde19d.css
+
+  Images and other types of assets omitted.
+
+ DONE  Build complete. The ../build/sysroot/var/lib/casaos/www directory is ready to be deployed.
+ INFO  Check out deployment instructions at https://cli.vuejs.org/guide/deployment.html
+      
