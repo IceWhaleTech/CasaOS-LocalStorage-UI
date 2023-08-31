@@ -1,6 +1,6 @@
 # CasaOS-UI
 
-The web-gui of CasaOS, build with VueJS 2.x
+The web-gui of CasaOS, build with VueJS 2.7
 
 ## Project setup
 
@@ -26,10 +26,4 @@ Will be output to the ./public folder
 
 ```
 yarn lint
-```
-
-### Use the openapi generator to generate the api client
-
-```
-yarn openapi
 ```

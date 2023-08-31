@@ -19,7 +19,7 @@ const commitHash = require('child_process')
 
 
 module.exports = {
-	publicPath: '/',
+	publicPath: '/modules/icewhale_localstorage/',
 	runtimeCompiler: true,
 	lintOnSave: false,
 	productionSourceMap: true,
