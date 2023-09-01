@@ -1,7 +1,7 @@
 /*
- * @LastEditors: Jerryk jerry@icewhale.org
- * @LastEditTime: 2023-03-15 14:13:55
- * @FilePath: /CasaOS-UI/src/events/message_bus.js
+ * @LastEditors: zhanghengxin ezreal.zhang@icewhale.org
+ * @LastEditTime: 2023-09-01 19:07:28
+ * @FilePath: /CasaOS-LocalStorage-UI/src/events/message_bus.js
  * @Description:
  *
  * Copyright (c) 2022 by IceWhale, All Rights Reserved.
@@ -51,15 +51,11 @@ module.exports = {
 	apps_open: async (name) => {
 		return await intermediateProcessor("casaos-ui:app:apps_open", {value: name})
 	},
-
-
-	// appstore_author: async (type) => {
-	// 	return await intermediateProcessor("casaos-ui:appstore:appstore_author", {value: type})
-	// },
-
-
-	//files
-
-	// local message, params: { action, payload, name }
-
+	apps_close: async (name) => {
+		return await intermediateProcessor("casaos-ui:app:apps_close", {value: name})
+	},
+	mircoapp_communicate: async (params) => {
+		const payload = typeof params === 'string' ? { value: params } : params;
+		return await intermediateProcessor("casaos-ui:app:mircoapp_communicate", payload);
+	},
 }

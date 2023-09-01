@@ -1,7 +1,7 @@
 <!--
- * @LastEditors: Jerryk jerry@icewhale.org
- * @LastEditTime: 2023-01-16 18:59:52
- * @FilePath: /CasaOS-UI/src/components/Storage/StorageManagerPanel.vue
+ * @LastEditors: zhanghengxin ezreal.zhang@icewhale.org
+ * @LastEditTime: 2023-09-01 19:05:58
+ * @FilePath: /CasaOS-LocalStorage-UI/src/components/Storage/StorageManagerPanel.vue
   * @Description:
   *
   * Copyright (c) 2022 by IceWhale, All Rights Reserved.
@@ -14,7 +14,7 @@
 			<header class="pl-5 mt-4 pt-1 b-line">
 				<h3 class="title is-3 mb-3">{{ $t('Storage Manager') }}</h3>
 				<div class="close-container">
-					<button class="delete" type="button" @click="$emit('close')"/>
+					<button class="delete" type="button" @click="close"/>
 				</div>
 			</header>
 			<section :class="{ 'b-line': storageData.length > 0 && activeTab === 0}" class="pr-5 pl-5 mt-4 pb-2">
@@ -110,6 +110,7 @@ import cToolTip             from '@/components/basicComponents/tooltip/tooltip.v
 import events               from '@/events/events';
 import MergeStorages        from '@/components/Storage/MergeStorages.vue';
 import CreatingStoragePanel from './CreatingStoragePanel.vue';
+import { MIRCO_APP_ACTION_ENUM } from "./const";
 
 export default {
 	name: "storage-manager-panel",
@@ -398,6 +399,16 @@ export default {
 				}
 			})
 
+		},
+
+		// close localstorage
+		close(){
+			this.$messageBus('apps_close', 'icewhale_localstorage');
+			this.$messageBus("mircoapp_communicate", {
+				action: MIRCO_APP_ACTION_ENUM.CLOSE,
+				name: 'icewhale_files'
+			});
+			// this.$emit('close:StorageManagerPanel')
 		},
 	}
 }

@@ -1,13 +1,13 @@
 <!--
-  * @LastEditors: zhanghengxin ezreal.zhang@icewhale.org
-  * @LastEditTime: 2022/12/1 下午7:59
-  * @FilePath: /CasaOS-UI/src/App.vue
+ * @LastEditors: zhanghengxin ezreal.zhang@icewhale.org
+ * @LastEditTime: 2023-09-01 18:58:34
+ * @FilePath: /CasaOS-LocalStorage-UI/src/App.vue
   * @Description:
   *
   * Copyright (c) 2022 by IceWhale, All Rights Reserved.
   -->
 <template>
-	<StorageManagerPanel></StorageManagerPanel>
+	<StorageManagerPanel ></StorageManagerPanel>
 </template>
 
 <script>
