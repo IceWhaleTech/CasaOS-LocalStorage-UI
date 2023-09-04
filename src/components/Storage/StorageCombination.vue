@@ -1,7 +1,7 @@
 <!--
-  * @LastEditors: zhanghengxin ezreal.zhang@icewhale.org
-  * @LastEditTime: 2022/12/19 下午12:50
-  * @FilePath: /CasaOS-UI/src/components/Storage/StorageCombination.vue
+ * @LastEditors: zhanghengxin ezreal.zhang@icewhale.org
+ * @LastEditTime: 2023-09-06 11:30:00
+ * @FilePath: /CasaOS-LocalStorage-UI/src/components/Storage/StorageCombination.vue
   * @Description:
   *
   * Copyright (c) 2022 by IceWhale, All Rights Reserved.
@@ -22,7 +22,7 @@
 						<div>
 							<h4 class="mb-0 has-text-left one-line has-text-emphasis-02 is-flex is-align-items-center">
 								{{
-									item.name || $t('undefined')
+									displayStorageName(item.name)
 								}}
 								<b-tag v-if="item.isSystem" class="ml-2 has-text-full-04">OS</b-tag>
 							</h4>
@@ -152,7 +152,9 @@ export default {
 				}
 			})
 		},
-
+		displayStorageName(name){
+			return name === "System" ? "Primary" : name ?? this.$t('undefined');
+		},
 	},
 }
 </script>

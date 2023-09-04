@@ -1,17 +1,17 @@
 <!--
-  * @LastEditors: zhanghengxin ezreal.zhang@icewhale.org
-  * @LastEditTime: 2023/8/29 下午3:49
-  * @FilePath: /CasaOS-UI/main/src/components/Storage/CreatingStoragePanel.vue
+ * @LastEditors: zhanghengxin ezreal.zhang@icewhale.org
+ * @LastEditTime: 2023-09-06 18:02:31
+ * @FilePath: /CasaOS-LocalStorage-UI/src/components/Storage/CreatingStoragePanel.vue
   * @Description:
   *
   * Copyright (c) 2023 by IceWhale, All Rights Reserved.
 
   -->
 <script setup>
-import LottieAnimation                                   from "lottie-web-vue";
-import {ref, defineProps, onMounted, getCurrentInstance} from "vue";
-import {renderSize}                                      from "@/composables/localstorage";
-import {ValidationObserver, ValidationProvider}          from "vee-validate";
+import LottieAnimation                                   		from "lottie-web-vue";
+import {ref, defineProps, onMounted, getCurrentInstance, watch} from "vue";
+import {renderSize}                                      		from "@/composables/localstorage";
+import {ValidationObserver, ValidationProvider}          		from "vee-validate";
 import "@/plugins/vee-validate";
 // import storage                                                            from "@/service/storage";
 
@@ -34,10 +34,40 @@ const isValidity = ref(false)
 const isCreating = ref(false)
 let createStorageName = ref("")
 createStorageName.value = createStorageNameDefault
-let createStoragePath = ref("")
-let createStorageSerial = ref("")
+// let createStoragePath = ref("")
+// let createStorageSerial = ref("")
 let createStorageType = ref("")
-let activeDisk = ref(0)
+let selectDisk = ref(unDiskData[0])
+
+const attentionTitle = ref("Attention")
+const attentionMessage = ref(`--------.`)
+const attentionType = ref("is-danger")
+watch(() => selectDisk.value, (val) => {
+	// attention PART!
+	let sign = 0;
+	val.children.forEach((item, index) => {
+		if (item.suported) {
+			sign++;
+		}
+	})
+	if(sign === val.children.length){
+		attentionTitle.value = "Success"
+		attentionMessage.value = `The selected disk is fully supported, and the system will format the disk and create a storage.`
+		attentionType.value = "is-success"
+		createStorageType.value = "mountable"
+	}else if(sign === 0){
+		attentionTitle.value = "Attention"
+		attentionMessage.value = `The selected disk is not supported, and the system will format the disk and create a storage.`
+		attentionType.value = "is-danger"
+		createStorageType.value = "format"
+	}else{
+		attentionTitle.value = "Attention"
+		attentionMessage.value = `The selected disk is partially supported, and the system will format the disk and create a storage.`
+		attentionType.value = "is-warning"
+		createStorageType.value = "mountable"
+	}
+},{immediate: true})
+
 
 const $emit = defineEmits(['refresh:DiskList', 'close:CreatingStoragePanel'])
 
@@ -50,8 +80,24 @@ function createStorage(needFormat) {
 	isValidity.value = true
 	checkStep(ob1.value).then(val => {
 		isValidity.value = false
-		if (val) {
-			submitCreate(needFormat)
+		if (!val) {
+			return
+		}
+
+		if(needFormat){
+			proxy.$buefy.dialog.confirm({
+				title: proxy.$t('Attention'),
+				message: proxy.$t('Are you sure you want to format the disk and create a storage?'),
+				type: 'is-danger',
+				hasIcon: true,
+				cancelText: proxy.$t('Cancel'),
+				confirmText: proxy.$t('Confirm'),
+				onConfirm: () => {
+					submitCreate(true)
+				}
+			})
+		}else{
+			submitCreate(false)
 		}
 	}).catch(err => {
 		isValidity.value = false
@@ -67,7 +113,7 @@ function createStorage(needFormat) {
 function submitCreate(format) {
 	isCreating.value = true
 	let data = {
-		path: createStoragePath.value,
+		path: selectDisk.value.path,
 		name: createStorageName.value,
 		format: format
 	}
@@ -103,24 +149,11 @@ function checkStep(ref) {
 	return ref.validate()
 }
 
-/**
- * @description: Disk choose handle
- * @return {void}
- * @param index
- */
-function onDiskChoose(index) {
-	createStoragePath.value = unDiskData[index].path
-	createStorageSerial.value = unDiskData[index].serial
-	createStorageType.value = getDiskType(unDiskData[index])
+function displayPartitionInfo(item, itemIndex){
+	const wheatherSupported = item.suported ? "" : ",Not Supported"
+	return `Partition ${itemIndex + 1} (${renderSize(item.size)} ${wheatherSupported})`
 }
 
-function getDiskType(item) {
-	return item.need_format ? "format" : "mountable"
-}
-
-onMounted(() => {
-	onDiskChoose(0)
-})
 </script>
 
 <template>
@@ -146,63 +179,34 @@ onMounted(() => {
 						</ValidationProvider>
 
 						<b-field :label="$t('Choose Drive')">
-							<b-select v-model="activeDisk" expanded @input="onDiskChoose">
-								<option v-for="(option, index) in unDiskData" :key="option.path" :value="index">
-									{{ option.name }} ({{ option.model }} - {{ renderSize(option.size) }})
-								</option>
-							</b-select>
+							<b-dropdown v-model="selectDisk" expanded>
+								<template #trigger>
+									<b-button icon-pack="casa" icon-right="down-outline" expanded class="is-justify-content-space-between is-size-6">
+										{{ selectDisk.name }} ({{ selectDisk.model }} - {{ renderSize(selectDisk.size) }})
+									</b-button>
+								</template>
+								<b-dropdown-item v-for="(option, index) in unDiskData" :key="option.path" :value="option">
+									<dl>
+										<dt>
+											{{ option.name }} ({{ option.model }} - {{ renderSize(option.size) }})
+											<b-icon class="ml-1" custom-size="mdi-18px" icon="check" type="is-success" v-if="selectDisk.name === option.name"></b-icon>
+										</dt>
+										<dd v-for="(child, childIndex) in option.children" :key=" option.path + childIndex" :value="childIndex">
+											{{displayPartitionInfo(child, childIndex)}}
+										</dd>
+									</dl>
+								</b-dropdown-item>
+							</b-dropdown>
 						</b-field>
 
 					</ValidationObserver>
 
-					<article v-if="createStorageType === 'format'" class="message is-danger mt-5">
-						<section class="message-body">
-							<div class="media">
-								<div class="media-left">
-								<span class="icon is-large is-danger"><i
-								class="mdi mdi-alert-circle mdi-48px"></i></span>
-								</div>
-								<div class="media-content">
-									<h3 class="is-size-5">{{ $t('Warning') }}</h3>
-									<p class="is-size-14px">
-										{{ $t("The selected drive will be emptied.") }}<br>
-										{{
-											$t(`Please make sure again that there is no important data on the selected drive
-										that needs to be
-										backed up.`)
-										}}
-									</p>
-								</div>
-							</div>
-						</section>
-					</article>
-
-					<article v-else class="message is-danger mt-5">
-						<section class="message-body">
-							<div class="media">
-								<div class="media-left">
-								<span class="icon is-large is-danger"><i
-								class="mdi mdi-alert-circle mdi-48px"></i></span>
-								</div>
-								<div class="media-content">
-									<h3 class="is-size-5">{{ $t('Attention') }}</h3>
-									<p class="is-size-14px">
-										{{ $t("The drive you select can be used directly as storage.") }}<br>
-										{{
-											$t(`You can also choose to create it after formatting. If formatted, the
-										selected drive will be
-										emptied.`)
-										}}<br>
-										{{
-											$t(`Please make sure again that there is no important data on the selected drive
-										that needs to be
-										backed up.`)
-										}}
-									</p>
-								</div>
-							</div>
-						</section>
-					</article>
+					<b-message :type="attentionType" has-icon class="mt-5">
+						<p class="is-size-5">{{ $t(attentionTitle) }}</p>
+						{{
+							$t(attentionMessage)
+						}}
+					</b-message>
 
 				</div>
 				<b-loading v-model="isLoading" :can-cancel="false" :is-full-page="false"></b-loading>
@@ -227,9 +231,7 @@ onMounted(() => {
 				<b-button :label="$t('Format and Create')" :loading="isValidity"
 						  :type="createStorageType === 'format' ? 'is-primary' : ''" rounded
 						  @click="createStorage(true)"/>
-				<b-button v-if="createStorageType === 'mountable'" :label="$t('Create')" :loading="isValidity"
-						  rounded
-						  type="is-primary" @click="createStorage(false)"/>
+				<b-button v-if="createStorageType === 'mountable'" :label="$t('Create')" :loading="isValidity" rounded type="is-primary" @click="createStorage(false)"/>
 			</div>
 		</footer>
 		<!-- Modal-Card Footer End -->
@@ -237,5 +239,14 @@ onMounted(() => {
 </template>
 
 <style lang="scss" scoped>
-
+// choose drive input PART!
+.is-justify-content-space-between.is-size-6{
+	height: 2.5rem;
+	padding-right: 11px;
+	padding-left: 11px;
+}
+dd{
+	margin-left: 2rem;
+	opacity: .7;
+}
 </style>

@@ -1,6 +1,6 @@
 <!--
  * @LastEditors: zhanghengxin ezreal.zhang@icewhale.org
- * @LastEditTime: 2023-09-01 19:05:58
+ * @LastEditTime: 2023-09-04 14:43:27
  * @FilePath: /CasaOS-LocalStorage-UI/src/components/Storage/StorageManagerPanel.vue
   * @Description:
   *
@@ -110,7 +110,7 @@ import cToolTip             from '@/components/basicComponents/tooltip/tooltip.v
 import events               from '@/events/events';
 import MergeStorages        from '@/components/Storage/MergeStorages.vue';
 import CreatingStoragePanel from './CreatingStoragePanel.vue';
-import { MIRCO_APP_ACTION_ENUM } from "./const";
+import { MIRCO_APP_ACTION_ENUM } from "@/const/index.js";
 
 export default {
 	name: "storage-manager-panel",
