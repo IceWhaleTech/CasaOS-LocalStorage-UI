@@ -1,7 +1,7 @@
 <!--
-  * @LastEditors: zhanghengxin ezreal.zhang@icewhale.org
-  * @LastEditTime: 2023/1/6 下午3:05
-  * @FilePath: /CasaOS-UI/src/components/Storage/StorageItem.vue
+ * @LastEditors: zhanghengxin ezreal.zhang@icewhale.org
+ * @LastEditTime: 2023-09-06 18:33:23
+ * @FilePath: /CasaOS-LocalStorage-UI/src/components/Storage/StorageItem.vue
   * @Description:
   *
   * Copyright (c) 2022 by IceWhale, All Rights Reserved.
@@ -16,7 +16,7 @@
 			<div class="ml-3 is-flex-grow-1 is-flex is-align-items-center">
 				<div>
 					<h4 class="mb-0 has-text-left one-line has-text-emphasis-02 is-flex is-align-items-center">
-						{{ item.name }}
+						{{ displayStorageName(item.name) }}
 						<b-tag v-if="item.isSystem" class="ml-2 has-text-full-04">OS
 						</b-tag>
 					</h4>
@@ -178,7 +178,9 @@ export default {
 				}
 			})
 		},
-
+		displayStorageName(name){
+			return (name === "System" && this.isZIMA) ? "ZimaOS" : name ?? this.$t('undefined');
+		},
 	},
 }
 </script>
