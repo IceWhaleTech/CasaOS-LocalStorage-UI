@@ -1,6 +1,6 @@
 <!--
  * @LastEditors: zhanghengxin ezreal.zhang@icewhale.org
- * @LastEditTime: 2023-09-06 18:33:23
+ * @LastEditTime: 2023-09-06 18:44:31
  * @FilePath: /CasaOS-LocalStorage-UI/src/components/Storage/StorageItem.vue
   * @Description:
   *
@@ -179,7 +179,7 @@ export default {
 			})
 		},
 		displayStorageName(name){
-			return (name === "System" && this.isZIMA) ? "ZimaOS" : name ?? this.$t('undefined');
+			return (name === "System" && this.isZIMA) ? "Zima HD" : name ?? this.$t('undefined');
 		},
 	},
 }
