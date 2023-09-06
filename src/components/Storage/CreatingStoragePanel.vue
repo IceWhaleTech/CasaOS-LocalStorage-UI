@@ -1,6 +1,6 @@
 <!--
  * @LastEditors: zhanghengxin ezreal.zhang@icewhale.org
- * @LastEditTime: 2023-09-06 18:02:31
+ * @LastEditTime: 2023-09-06 18:26:51
  * @FilePath: /CasaOS-LocalStorage-UI/src/components/Storage/CreatingStoragePanel.vue
   * @Description:
   *
@@ -125,6 +125,11 @@ function submitCreate(format) {
 				message: res.data.message,
 				type: 'is-danger'
 			})
+			
+			attentionTitle.value = "Attention"
+			attentionMessage.value = `The selected disk is not supported, and the system will format the disk and create a storage.`
+			attentionType.value = "is-danger"
+			
 			console.error(res.data.message)
 		} else {
 			$emit('refresh:DiskList', true)
