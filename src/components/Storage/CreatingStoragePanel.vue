@@ -1,6 +1,6 @@
 <!--
  * @LastEditors: zhanghengxin ezreal.zhang@icewhale.org
- * @LastEditTime: 2023-09-07 14:22:35
+ * @LastEditTime: 2023-09-07 15:17:43
  * @FilePath: /CasaOS-LocalStorage-UI/src/components/Storage/CreatingStoragePanel.vue
   * @Description:
   *
@@ -192,7 +192,7 @@ function displayPartitionInfo(item, itemIndex){
 						</ValidationProvider>
 
 						<b-field :label="$t('Choose Drive')">
-							<b-dropdown v-model="selectDisk" expanded scrollable>
+							<b-dropdown v-model="selectDisk" expanded scrollable append-to-body>
 								<template #trigger>
 									<b-button icon-pack="casa" icon-right="down-outline" expanded class="is-justify-content-space-between is-size-6">
 										{{ selectDisk.name }} ({{ selectDisk.model }} - {{ renderSize(selectDisk.size) }})
