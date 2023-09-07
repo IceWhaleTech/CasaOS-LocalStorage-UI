@@ -1,6 +1,6 @@
 <!--
  * @LastEditors: zhanghengxin ezreal.zhang@icewhale.org
- * @LastEditTime: 2023-09-07 15:17:43
+ * @LastEditTime: 2023-09-07 15:43:36
  * @FilePath: /CasaOS-LocalStorage-UI/src/components/Storage/CreatingStoragePanel.vue
   * @Description:
   *
@@ -258,8 +258,13 @@ function displayPartitionInfo(item, itemIndex){
 	padding-right: 11px;
 	padding-left: 11px;
 }
+// drive list ITEM PART!
 dd{
 	margin-left: 2rem;
 	opacity: .7;
+}
+.dropdown-item,.dropdown-item.is-active{
+	background: hsl(0, 0%, 96%);
+	color: hsl(0, 0%, 4%);
 }
 </style>
