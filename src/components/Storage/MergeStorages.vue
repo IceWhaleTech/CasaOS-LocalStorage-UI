@@ -2,7 +2,7 @@
  * @Author: zhanghengxin hengxin.zhang@icewhale.org
  * @Date:  2022-09-13 17:01:37
  * @LastEditors: zhanghengxin ezreal.zhang@icewhale.org
- * @LastEditTime: 2023-09-06 17:44:25
+ * @LastEditTime: 2023-09-07 14:35:30
  * @FilePath: /CasaOS-LocalStorage-UI/src/components/Storage/MergeStorages.vue
  * @Description:
  *
@@ -100,7 +100,7 @@
 			</div>
 			<template v-if="currentStep === 2">
 				<div class="font">
-					{{ $t('Enter "I AM SURE" to proceed with the operation.') }}
+					{{ $t(`Enter 'I AM SURE' to proceed with the operation.`) }}
 				</div>
 				<b-input ref="inputPassword" v-model="password" class="mt-4" password-reveal
 					@keyup.enter.native="verifyOperate(password)"></b-input>

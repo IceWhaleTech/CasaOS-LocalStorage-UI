@@ -1,6 +1,6 @@
 <!--
  * @LastEditors: zhanghengxin ezreal.zhang@icewhale.org
- * @LastEditTime: 2023-09-06 11:30:00
+ * @LastEditTime: 2023-09-07 11:56:46
  * @FilePath: /CasaOS-LocalStorage-UI/src/components/Storage/StorageCombination.vue
   * @Description:
   *
@@ -9,7 +9,7 @@
 <template>
 	<div v-show="showCombination" class="mb-5 mt-2 pt-5 pb-5 border-1 combination-box">
 		<div class="is-relative is-flex is-justify-content-center top--2rem">
-			<div class="pr-1 pl-1 combination-title has-text-full-04">{{ OS }} HD</div>
+			<div class="pr-1 pl-1 combination-title has-text-full-04">{{ displayStorageGroupName() }}</div>
 		</div>
 		<div class="is-flex ">
 			<div class="is-flex-grow-1">
@@ -22,7 +22,7 @@
 						<div>
 							<h4 class="mb-0 has-text-left one-line has-text-emphasis-02 is-flex is-align-items-center">
 								{{
-									displayStorageName(item.name)
+									displayStorageItemName(item.name)
 								}}
 								<b-tag v-if="item.isSystem" class="ml-2 has-text-full-04">OS</b-tag>
 							</h4>
@@ -152,7 +152,10 @@ export default {
 				}
 			})
 		},
-		displayStorageName(name){
+		displayStorageGroupName(name){
+			return this.isZIMA ?  "Zima HD" : "OS HD";
+		},
+		displayStorageItemName(name){
 			return name === "System" ? "Primary" : name ?? this.$t('undefined');
 		},
 	},

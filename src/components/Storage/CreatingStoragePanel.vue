@@ -1,6 +1,6 @@
 <!--
  * @LastEditors: zhanghengxin ezreal.zhang@icewhale.org
- * @LastEditTime: 2023-09-06 18:26:51
+ * @LastEditTime: 2023-09-07 14:22:35
  * @FilePath: /CasaOS-LocalStorage-UI/src/components/Storage/CreatingStoragePanel.vue
   * @Description:
   *
@@ -9,16 +9,13 @@
   -->
 <script setup>
 import LottieAnimation                                   		from "lottie-web-vue";
-import {ref, defineProps, onMounted, getCurrentInstance, watch} from "vue";
+import {ref, defineProps, getCurrentInstance, watch} 			from "vue";
 import {renderSize}                                      		from "@/composables/localstorage";
 import {ValidationObserver, ValidationProvider}          		from "vee-validate";
 import "@/plugins/vee-validate";
-// import storage                                                            from "@/service/storage";
 
-// const comp = defineComponent({mixin: [mixin]})
 const {proxy} = getCurrentInstance()
 const ob1 = ref(null)
-// 设定props isCreating
 const {unDiskData, createStorageNameDefault} = defineProps({
 	unDiskData: {
 		type: Array,
@@ -34,8 +31,6 @@ const isValidity = ref(false)
 const isCreating = ref(false)
 let createStorageName = ref("")
 createStorageName.value = createStorageNameDefault
-// let createStoragePath = ref("")
-// let createStorageSerial = ref("")
 let createStorageType = ref("")
 let selectDisk = ref(unDiskData[0])
 
@@ -44,6 +39,19 @@ const attentionMessage = ref(`--------.`)
 const attentionType = ref("is-danger")
 watch(() => selectDisk.value, (val) => {
 	// attention PART!
+	if(val.children.length === 0 && !val.suported){
+		attentionTitle.value = "Attention"
+		attentionMessage.value = `The selected disk is not supported, and the system will format the disk and create a storage.`
+		attentionType.value = "is-danger"
+		createStorageType.value = "format"
+		return
+	}else if(val.children.length === 0 && val.suported){
+		attentionTitle.value = ""
+		attentionMessage.value = ``
+		attentionType.value = ""
+		createStorageType.value = "mountable"
+		return
+	}
 	let sign = 0;
 	val.children.forEach((item, index) => {
 		if (item.suported) {
@@ -184,7 +192,7 @@ function displayPartitionInfo(item, itemIndex){
 						</ValidationProvider>
 
 						<b-field :label="$t('Choose Drive')">
-							<b-dropdown v-model="selectDisk" expanded>
+							<b-dropdown v-model="selectDisk" expanded scrollable>
 								<template #trigger>
 									<b-button icon-pack="casa" icon-right="down-outline" expanded class="is-justify-content-space-between is-size-6">
 										{{ selectDisk.name }} ({{ selectDisk.model }} - {{ renderSize(selectDisk.size) }})
@@ -206,7 +214,7 @@ function displayPartitionInfo(item, itemIndex){
 
 					</ValidationObserver>
 
-					<b-message :type="attentionType" has-icon class="mt-5">
+					<b-message :type="attentionType" has-icon class="mt-5" v-show="attentionTitle">
 						<p class="is-size-5">{{ $t(attentionTitle) }}</p>
 						{{
 							$t(attentionMessage)

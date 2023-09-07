@@ -1,6 +1,6 @@
 <!--
  * @LastEditors: zhanghengxin ezreal.zhang@icewhale.org
- * @LastEditTime: 2023-09-06 18:44:31
+ * @LastEditTime: 2023-09-07 14:52:49
  * @FilePath: /CasaOS-LocalStorage-UI/src/components/Storage/StorageItem.vue
   * @Description:
   *
@@ -81,47 +81,49 @@ export default {
 
 			this.$buefy.dialog.prompt({
 				title: this.$t('Remove'),
-				message: this.$t('Enter the password to continue:'),
+				message: this.$t(`Enter 'I AM SURE' to proceed with the operation.`),
 				inputAttrs: {
-					type: "password"
+					type: "confirm"
 				},
 				trapFocus: true,
 				confirmText: this.$t('OK'),
 				cancelText: this.$t('Cancel'),
+				closeOnConfirm: false,
 				onCancel: () => {
 					this.isRemoving = false;
 				},
-				onConfirm: (value) => {
+				onConfirm: (confirm,{close}) => {
+					if(confirm !== `I AM SURE`){
+						this.$buefy.toast.open({
+							duration: 3000,
+							message: this.$t('Incorrect input'),
+							type: 'is-danger'
+						})
+						return;
+					}
 					let data = {
-						path: path,
-						password: value
+						path: path
 					}
 
 					this.$api.disks.umount(data).then((res) => {
 						if (res.data.success !== 200) {
-							this.isRemoving = false;
 							this.$buefy.toast.open({
 								duration: 3000,
 								message: res.data.message,
 								type: 'is-danger'
 							})
-							console.error(res);
 						} else {
-							this.isRemoving = false;
-							let _this = this
-							delay(() => {
-								_this.isRemoving = false;
-								_this.$emit('getDiskList');
-							}, 1000);
+							this.$emit('getDiskList');
 						}
 					}).catch(e => {
-						this.isRemoving = false;
 						this.$buefy.toast.open({
 							duration: 3000,
 							message: e.response.data.message,
 							type: 'is-danger'
 						})
-						console.error(e)
+					}).finally(() => {
+						this.isRemoving = false;
+						close()
 					})
 				}
 			})

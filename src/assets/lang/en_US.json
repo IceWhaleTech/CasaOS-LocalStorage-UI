@@ -406,5 +406,7 @@
   "Rebulid error": "Rebulid error",
   "Installing {title}": "Installing {title}",
   "Legacy app (To be rebuilt).": "Legacy app (To be rebuilt).",
-  "To be rebuilt.": "To be rebuilt."
+  "To be rebuilt.": "To be rebuilt.",
+  "Incorrect input": "Incorrect input",
+  "Enter 'I AM SURE' to proceed with the operation.": "Enter 'I AM SURE' to proceed with the operation."
 }
