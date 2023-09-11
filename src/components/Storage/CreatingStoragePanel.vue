@@ -1,6 +1,6 @@
 <!--
  * @LastEditors: zhanghengxin ezreal.zhang@icewhale.org
- * @LastEditTime: 2023-09-07 15:43:36
+ * @LastEditTime: 2023-09-11 15:53:56
  * @FilePath: /CasaOS-LocalStorage-UI/src/components/Storage/CreatingStoragePanel.vue
   * @Description:
   *
@@ -34,8 +34,8 @@ createStorageName.value = createStorageNameDefault
 let createStorageType = ref("")
 let selectDisk = ref(unDiskData[0])
 
-const attentionTitle = ref("Attention")
-const attentionMessage = ref(`--------.`)
+const attentionTitle = ref("init title.")
+const attentionMessage = ref(`init message.`)
 const attentionType = ref("is-danger")
 watch(() => selectDisk.value, (val) => {
 	// attention PART!
@@ -60,17 +60,17 @@ watch(() => selectDisk.value, (val) => {
 	})
 	if(sign === val.children.length){
 		attentionTitle.value = "Success"
-		attentionMessage.value = `The selected disk is fully supported, and the system will format the disk and create a storage.`
+		attentionMessage.value = `The selected disk can be used directly. Click 'Create' and the partitions and data will be fully retained.`
 		attentionType.value = "is-success"
 		createStorageType.value = "mountable"
 	}else if(sign === 0){
 		attentionTitle.value = "Attention"
-		attentionMessage.value = `The selected disk is not supported, and the system will format the disk and create a storage.`
+		attentionMessage.value = `The selected disk must be formatted before it can be used, all data will be erased.`
 		attentionType.value = "is-danger"
 		createStorageType.value = "format"
 	}else{
 		attentionTitle.value = "Attention"
-		attentionMessage.value = `The selected disk is partially supported, and the system will format the disk and create a storage.`
+		attentionMessage.value = `The data in the supported partitions that are clicked to create will be retained, unsupported partitions will be ignored.`
 		attentionType.value = "is-warning"
 		createStorageType.value = "mountable"
 	}
@@ -95,11 +95,11 @@ function createStorage(needFormat) {
 		if(needFormat){
 			proxy.$buefy.dialog.confirm({
 				title: proxy.$t('Attention'),
-				message: proxy.$t('Are you sure you want to format the disk and create a storage?'),
+				message: proxy.$t("The disk will be formatted as a single partition, all data will be erased."),
 				type: 'is-danger',
 				hasIcon: true,
 				cancelText: proxy.$t('Cancel'),
-				confirmText: proxy.$t('Confirm'),
+				confirmText: proxy.$t("Confirm"),
 				onConfirm: () => {
 					submitCreate(true)
 				}
@@ -135,7 +135,11 @@ function submitCreate(format) {
 			})
 			
 			attentionTitle.value = "Attention"
-			attentionMessage.value = `The selected disk is not supported, and the system will format the disk and create a storage.`
+			if(format){
+				attentionMessage.value = `Storage space creation failed. Please try manually formatting before trying again.`
+			}else{
+				attentionMessage.value = `Storage space creation failed. Please try formatting and creating again.`
+			}
 			attentionType.value = "is-danger"
 			
 			console.error(res.data.message)
