@@ -1,6 +1,6 @@
 <!--
  * @LastEditors: zhanghengxin ezreal.zhang@icewhale.org
- * @LastEditTime: 2023-09-04 14:43:27
+ * @LastEditTime: 2023-09-12 16:17:30
  * @FilePath: /CasaOS-LocalStorage-UI/src/components/Storage/StorageManagerPanel.vue
   * @Description:
   *
@@ -406,7 +406,7 @@ export default {
 			this.$messageBus('apps_close', 'icewhale_localstorage');
 			this.$messageBus("mircoapp_communicate", {
 				action: MIRCO_APP_ACTION_ENUM.CLOSE,
-				name: 'icewhale_files'
+				name: 'icewhale_localstorage'
 			});
 			// this.$emit('close:StorageManagerPanel')
 		},
