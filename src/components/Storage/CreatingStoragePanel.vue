@@ -1,6 +1,6 @@
 <!--
  * @LastEditors: zhanghengxin ezreal.zhang@icewhale.org
- * @LastEditTime: 2023-09-11 15:53:56
+ * @LastEditTime: 2023-09-12 15:38:03
  * @FilePath: /CasaOS-LocalStorage-UI/src/components/Storage/CreatingStoragePanel.vue
   * @Description:
   *
@@ -39,13 +39,13 @@ const attentionMessage = ref(`init message.`)
 const attentionType = ref("is-danger")
 watch(() => selectDisk.value, (val) => {
 	// attention PART!
-	if(val.children.length === 0 && !val.suported){
+	if(val.children.length === 0 && !val.supported){
 		attentionTitle.value = "Attention"
 		attentionMessage.value = `The selected disk is not supported, and the system will format the disk and create a storage.`
 		attentionType.value = "is-danger"
 		createStorageType.value = "format"
 		return
-	}else if(val.children.length === 0 && val.suported){
+	}else if(val.children.length === 0 && val.supported){
 		attentionTitle.value = ""
 		attentionMessage.value = ``
 		attentionType.value = ""
@@ -54,7 +54,7 @@ watch(() => selectDisk.value, (val) => {
 	}
 	let sign = 0;
 	val.children.forEach((item, index) => {
-		if (item.suported) {
+		if (item.supported) {
 			sign++;
 		}
 	})
@@ -167,7 +167,7 @@ function checkStep(ref) {
 }
 
 function displayPartitionInfo(item, itemIndex){
-	const wheatherSupported = item.suported ? "" : ",Not Supported"
+	const wheatherSupported = item.supported ? "" : ",Not Supported"
 	return `Partition ${itemIndex + 1} (${renderSize(item.size)} ${wheatherSupported})`
 }
 
