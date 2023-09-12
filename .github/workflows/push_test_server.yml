@@ -2,7 +2,9 @@ name: push_test_server
 
 on:
     workflow_dispatch:
-
+    push:
+        branches:
+            - '!main'
 jobs:
     release:
 
