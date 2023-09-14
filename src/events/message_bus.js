@@ -1,6 +1,6 @@
 /*
  * @LastEditors: zhanghengxin ezreal.zhang@icewhale.org
- * @LastEditTime: 2023-09-01 19:07:28
+ * @LastEditTime: 2023-09-14 18:34:54
  * @FilePath: /CasaOS-LocalStorage-UI/src/events/message_bus.js
  * @Description:
  *
@@ -16,8 +16,15 @@ async function intermediateProcessor(name, ownParameter) {
 		"casaos_lang": "123456789",
 	}
 	if (typeof window !== 'undefined') {
-		let state = await import('../store').then((module) => module.default);
-		store = state.state;
+		let VXstate = await import('../store').then((module) => module.default);
+		//RECORD: the value shouldn't be changed.
+		//UPDATE: from window.$wujie
+		VXstate.commit('SET_ACCESS_TOKEN', window.$wujie.props?.access_token ?? "");
+		VXstate.commit('SET_REFRESH_TOKEN', window.$wujie.props?.refresh_token ?? "");
+		VXstate.commit('SET_DEVICE_ID', window.$wujie.props?.device_id ?? "");
+		VXstate.commit('SET_ACCESS_ID', window.$wujie.props?.access_id ?? "");
+		VXstate.commit('SET_LANGUAGE', window.$wujie.props?.casaos_lang ?? "");
+		store = VXstate.state;
 	}
 	let publicParameter = {
 		"device_id": store.device_id.toString(),
