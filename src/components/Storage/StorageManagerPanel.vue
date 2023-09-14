@@ -1,6 +1,6 @@
 <!--
  * @LastEditors: zhanghengxin ezreal.zhang@icewhale.org
- * @LastEditTime: 2023-09-14 11:43:42
+ * @LastEditTime: 2023-09-14 16:03:33
  * @FilePath: /CasaOS-LocalStorage-UI/src/components/Storage/StorageManagerPanel.vue
   * @Description:
   *
@@ -11,7 +11,7 @@
 
 		<!-- Modal-Card Body Start -->
 		<template v-if="!CreatingStoragePanelIsShow">
-			<header class="pl-5 mt-4 pt-1 b-line">
+			<header class="pl-5 pr-5 mt-4 pt-1 b-line">
 				<h3 class="title is-3 mb-3">{{ $t('Storage Manager') }}</h3>
 				<div class="close-container">
 					<button class="delete" type="button" @click="close"/>
@@ -425,38 +425,6 @@ export default {
 	align-items: center;
 }
 
-.storage-modal {
-	.modal-card-body {
-		overflow-y: hidden;
-		transition: height 0.3s;
-		padding: 2rem 2rem 2rem 2rem;
-		position: relative;
-
-		.tab-item {
-			max-height: calc(100vh - 15rem);
-			overflow-y: overlay;
-		}
-	}
-
-	.modal-card-foot {
-		padding-top: 0;
-	}
-
-	.close-container {
-		position: absolute;
-		right: 1.25rem;
-		top: 1rem;
-	}
-
-	.tab-content {
-		padding: 0;
-	}
-
-	.status {
-		min-width: 7.75rem;
-	}
-}
-
 .popper {
 	background-color: #505459;
 	padding: 0.35rem 0.75rem;
@@ -472,9 +440,9 @@ export default {
 	border-bottom: 1px solid hsla(208, 16%, 94%, 1);
 }
 
-.tab-content {
-	padding: 1.5rem 0 0;
-}
+// .tab-content {
+// 	padding: 1.5rem 0 0;
+// }
 
 ._background-tips {
 	background-color: hsla(208, 16%, 98%, 1);
