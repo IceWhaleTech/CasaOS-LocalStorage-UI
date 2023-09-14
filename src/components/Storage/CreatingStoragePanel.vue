@@ -1,6 +1,6 @@
 <!--
  * @LastEditors: zhanghengxin ezreal.zhang@icewhale.org
- * @LastEditTime: 2023-09-12 18:38:34
+ * @LastEditTime: 2023-09-14 12:01:51
  * @FilePath: /CasaOS-LocalStorage-UI/src/components/Storage/CreatingStoragePanel.vue
   * @Description:
   *
@@ -270,5 +270,9 @@ dd{
 .dropdown-item,.dropdown-item.is-active{
 	background: hsl(0, 0%, 96%);
 	color: hsl(0, 0%, 4%);
+}
+
+.creating-animation{
+	height: 289.25px;
 }
 </style>

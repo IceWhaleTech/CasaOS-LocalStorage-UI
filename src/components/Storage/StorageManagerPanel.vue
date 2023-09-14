@@ -1,6 +1,6 @@
 <!--
  * @LastEditors: zhanghengxin ezreal.zhang@icewhale.org
- * @LastEditTime: 2023-09-12 16:17:30
+ * @LastEditTime: 2023-09-14 11:43:42
  * @FilePath: /CasaOS-LocalStorage-UI/src/components/Storage/StorageManagerPanel.vue
   * @Description:
   *
@@ -89,6 +89,7 @@
 		<CreatingStoragePanel v-else :createStorageNameDefault="createStorageNameDefault"
 							  :storageData="storageData" :unDiskData="unDiskData"
 							  @close:CreatingStoragePanel="CreatingStoragePanelIsShow = false"
+							  @close="close"
 							  @refresh:DiskList="getDiskList"></CreatingStoragePanel>
 
 		<!-- Modal-Card Body End -->
