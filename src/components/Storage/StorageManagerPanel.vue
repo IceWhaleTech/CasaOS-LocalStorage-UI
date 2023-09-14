@@ -1,6 +1,6 @@
 <!--
  * @LastEditors: zhanghengxin ezreal.zhang@icewhale.org
- * @LastEditTime: 2023-09-14 16:03:33
+ * @LastEditTime: 2023-09-14 19:03:38
  * @FilePath: /CasaOS-LocalStorage-UI/src/components/Storage/StorageManagerPanel.vue
   * @Description:
   *
@@ -17,7 +17,7 @@
 					<button class="delete" type="button" @click="close"/>
 				</div>
 			</header>
-			<section :class="{ 'b-line': storageData.length > 0 && activeTab === 0}" class="pr-5 pl-5 mt-4 pb-2">
+			<section :class="{ 'b-line': storageData.length > 0 && activeTab === 0}" class="pr-5 pl-5 mt-4 pb-2 max-height">
 				<!-- Storage and Disk List Start -->
 				<div class="is-flex-grow-1 is-relative">
 					<div v-if="activeTab === 1" class="create-container">
@@ -506,5 +506,9 @@ export default {
 			border-bottom: none !important;
 		}
 	}
+}
+.max-height{
+	max-height: 60vh;
+	overflow-y: auto;
 }
 </style>
