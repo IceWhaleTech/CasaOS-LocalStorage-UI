@@ -3,6 +3,10 @@ name: push_test_server
 on:
     push:
     workflow_dispatch:
+    
+    push:
+        branches:
+            - '**/**'
 jobs:
     release:
 

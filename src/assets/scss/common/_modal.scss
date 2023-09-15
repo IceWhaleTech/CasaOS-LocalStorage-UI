@@ -15,31 +15,58 @@
 
 
 .modal-card {
+	overflow: visible;
 	background: rgba(255, 255, 255, 1);
 	border-radius: $backDropBorderRadius;
 	
-	.close-container {
-		position: absolute;
-		right: 2rem;
-		top: 2rem;
-	}
-	
-	.modal-close-container {
-		padding-left: 1rem;
-		margin-left: 0.5rem;
-		position: relative;
-		height: 100%;
-	}
-	
-	.modal-close-container-line {
-		&:before {
-			content: "";
-			position: absolute;
-			border-left: #363636 2px solid;
-			height: 1rem;
-			left: 0;
+	header {
+		display: flex;
+		flex-direction: row;
+		&>:first-child {
+			display: inline-flex;
+			flex-grow: 1;
+		}
+		&>:last-child{
+			display: inline-flex;
+			flex-shrink: 1;
+			display: flex;
+			align-items: center;
+		}
+
+		.close-container {
+			// position: absolute;
+			// right: 2rem;
+			// top: 1.5rem;
+			width: 2rem;
+			height: 2rem;
+			border-radius: 6px;
+			justify-content: center;
+			&:hover {
+				background: hsla(208, 27%, 95%, 1);
+			}
+			&:active {
+				background: hsla(208, 16%, 92%, 1);
+			}
 		}
 	}
+	
+	
+	// .modal-close-container {
+	// 	padding-left: 1rem;
+	// 	margin-left: 0.5rem;
+	// 	position: relative;
+	// 	height: 100%;
+	// }
+	
+	// .modal-close-container-line {
+	// 	&:before {
+	// 		content: "";
+	// 		position: absolute;
+	// 		border-left: #363636 2px solid;
+	// 		height: 1rem;
+	// 		left: 0;
+	// 	}
+	// }
 	
 	.modal-card-head,
 	.modal-card-body,
