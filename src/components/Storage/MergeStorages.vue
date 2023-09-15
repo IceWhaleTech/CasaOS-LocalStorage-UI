@@ -2,7 +2,7 @@
  * @Author: zhanghengxin hengxin.zhang@icewhale.org
  * @Date:  2022-09-13 17:01:37
  * @LastEditors: zhanghengxin ezreal.zhang@icewhale.org
- * @LastEditTime: 2023-09-07 14:35:30
+ * @LastEditTime: 2023-09-15 16:18:12
  * @FilePath: /CasaOS-LocalStorage-UI/src/components/Storage/MergeStorages.vue
  * @Description:
  *
@@ -102,8 +102,8 @@
 				<div class="font">
 					{{ $t(`Enter 'I AM SURE' to proceed with the operation.`) }}
 				</div>
-				<b-input ref="inputPassword" v-model="password" class="mt-4" password-reveal
-					@keyup.enter.native="verifyOperate(password)"></b-input>
+				<b-input ref="inputPassword" v-model="inputConfirm" class="mt-4" password-reveal
+					@keyup.enter.native="verifyOperate(inputConfirm)"></b-input>
 			</template>
 			<div v-if="currentStep === 3" class="is-flex is-align-items-center font">
 				<div class="message-danger left mr-2 is-flex is-align-items-center">
@@ -137,7 +137,7 @@
 				<b-button v-show="currentStep === 1" :label="$t(affirm)" :loading="isConnecting"
 					class="_has-background-red-default is-rounded _has-text-white" expaned @click="currentStep = 2" />
 				<b-button v-show="currentStep === 2" :label="$t(affirm)" :loading="isConnecting" expaned rounded
-					type="is-primary" @click="verifyOperate(password)" />
+					type="is-primary" @click="verifyOperate(inputConfirm)" />
 				<b-button v-show="currentStep === 3" :label="$t(affirm)" :loading="isConnecting" expaned rounded
 					type="is-primary" @click="restart" />
 				<b-button v-show="currentStep === 4" :label="$t(affirm)" :loading="isConnecting" expaned rounded
@@ -236,7 +236,7 @@ export default {
 			title: "Merge Storages",
 			affirm: "Submit",
 			mergeInfo: [],
-			password: "",
+			inputConfirm: "",
 			runName: "",
 			notEmpty: false,
 			mergeStorageList: [],
@@ -516,6 +516,7 @@ export default {
 		verifyOperate(content) {
 			if (content === "I AM SURE") {
 				this.submit(null, true);
+				this.inputConfirm = "";
 				return;
 			}
 			this.$buefy.toast.open({
