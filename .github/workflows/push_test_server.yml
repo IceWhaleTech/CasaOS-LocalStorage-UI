@@ -1,8 +1,12 @@
 name: push_test_server
 
 on:
+    push:
     workflow_dispatch:
-
+    
+    push:
+        branches:
+            - '**/**'
 jobs:
     release:
 
@@ -49,7 +53,7 @@ jobs:
             - run: yarn install
             - run: yarn build
             - run: |
-                  tar -zcvf linux-all-casaos-v99.99.99.tar.gz build
+                  tar -zcvf linux-all-icewhale-localstorage-ui-v99.99.99.tar.gz build
                   ls
 
             - name: install sshpass
@@ -76,9 +80,9 @@ jobs:
             - name: copy tar to target hostname
               shell: bash
               run: |
-                  sshpass -p "${{ secrets.ssh_password }}" scp -r -o StrictHostKeyChecking=no -P 22 ./linux-all-casaos-v99.99.99.tar.gz root@10.147.18.11:/var/www/download
+                  sshpass -p "${{ secrets.ssh_password }}" scp -r -o StrictHostKeyChecking=no -P 22 ./linux-all-icewhale-localstorage-ui-v99.99.99.tar.gz root@10.147.18.11:/var/www/download
                   echo "ping success"
             - name: Error Handling
               if: ${{ failure() }}
               run: |
-                  curl -X POST -H "Content-Type: application/json" -d '{"msg_type":"text","content":{"text":"CasaOS-UI push error"}}' ${{ secrets.SSH_ROBOT_URL }} 
+                  curl -X POST -H "Content-Type: application/json" -d '{"msg_type":"text","content":{"text":"icewhale-localstorage-ui push error"}}' ${{ secrets.SSH_ROBOT_URL }} 

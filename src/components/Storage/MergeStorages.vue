@@ -2,55 +2,57 @@
  * @Author: zhanghengxin hengxin.zhang@icewhale.org
  * @Date:  2022-09-13 17:01:37
  * @LastEditors: zhanghengxin ezreal.zhang@icewhale.org
- * @LastEditTime: 2023-07-13 12:52:59
- * @FilePath: /CasaOS-UI/main/src/components/Storage/MergeStorages.vue
+ * @LastEditTime: 2023-09-07 14:35:30
+ * @FilePath: /CasaOS-LocalStorage-UI/src/components/Storage/MergeStorages.vue
  * @Description:
  *
  * Copyright (c) 2022 by IceWhale, All Rights Reserved.
 -->
 <template>
 	<div :class="{ '_max-width-320': currentStep === 1 }">
-
-		<section v-if="currentStep === 0"
-				 class="notification is-overlay mb-0 pr-0 pl-0 pt-2 pb-3 non-backgroud">
+		<section v-if="currentStep === 0" class="notification is-overlay mb-0 pr-0 pl-0 pt-2 pb-3 non-backgroud">
 			<div v-if="currentStep === 0" class="_is-normal _has-text-gray-600 mb-4">
-				{{ $t('All the checked Storage will be merged into {CasaOS} HD.', {CasaOS: OS}) }}
+				{{
+					$t("All the checked Storage will be merged into {CasaOS} HD.", {
+						CasaOS: OS,
+					})
+				}}
 			</div>
 
 			<div v-for="(item, index) in storageData" :key="item.path + index" class="is-flex mb-1 radius _height-40">
 				<div class="ml-2 mr-1 is-flex is-align-items-center _has-color-brand-400">
 					<b-icon icon="storage-other" pack="casa" size="is-20"></b-icon>
 				</div>
-				<div class="is-flex is-flex-grow-1 is-flex-direction-column is-justify-content-center ">
-          <span class="is-uppercase one-line _is-text-emphasis-03 _has-text-gray-800">{{
-				  item.name || $t('undefined')
-			  }}</span>
+				<div class="is-flex is-flex-grow-1 is-flex-direction-column is-justify-content-center">
+					<span class="is-uppercase one-line _is-text-emphasis-03 _has-text-gray-800">{{ item.name ||
+						$t("undefined") }}</span>
 				</div>
 				<div class="is-flex is-flex-shrink-0 is-flex-direction-column is-justify-content-center mr-2">
-          <span class="is-uppercase _is-text-full-03 _has-text-gray-600">{{
-				  renderSize(item.size -
-				  item.availSize)
-			  }}/{{ renderSize(item.size) }}</span>
+					<span class="is-uppercase _is-text-full-03 _has-text-gray-600">
+						{{ 
+							renderSize(item.size - item.availSize)
+						}}/{{
+							renderSize(item.size)
+						}}
+					</span>
 				</div>
 				<b-checkbox v-model="checkBoxGroup" :disabled="item.persistedIn !== 'casaos' || item.isSystem"
-							:native-value="item.uuid" class="mr-2"></b-checkbox>
+					:native-value="item.uuid" class="mr-2"></b-checkbox>
 			</div>
 
-			<div v-for="(item, index) in storageMissData" :key="item.path + index"
-				 class="is-flex mb-1 radius _height-40">
+			<div v-for="(item, index) in storageMissData" :key="item.path + index" class="is-flex mb-1 radius _height-40">
 				<div class="ml-2 mr-1 is-flex is-align-items-center _has-color-brand-400">
 					<b-icon icon="storage-other" pack="casa" size="is-20"></b-icon>
 				</div>
-				<div class="is-flex is-flex-grow-1 is-flex-direction-column is-justify-content-center ">
-          <span class="is-uppercase one-line  _is-text-emphasis-03 _has-text-gray-800">{{
-				  item.name || $t('undefined')
-			  }}</span>
+				<div class="is-flex is-flex-grow-1 is-flex-direction-column is-justify-content-center">
+					<span class="is-uppercase one-line _is-text-emphasis-03 _has-text-gray-800">{{ item.name ||
+						$t("undefined") }}</span>
 				</div>
 				<div class="is-flex is-flex-shrink-0 is-flex-direction-column is-justify-content-center mr-2">
-          <span class="is-flex is-align-items-center has-text-danger small-font">
-            <b-icon class="warn" custom-size="casa-16px" icon="warning-solid" pack="casa"></b-icon>
-            {{ $t('Missing') }}
-          </span>
+					<span class="is-flex is-align-items-center has-text-danger small-font">
+						<b-icon class="warn" custom-size="casa-16px" icon="warning-solid" pack="casa"></b-icon>
+						{{ $t("Missing") }}
+					</span>
 				</div>
 				<b-checkbox v-model="checkBoxMissGroup" :native-value="item.path" class="mr-2"></b-checkbox>
 			</div>
@@ -78,7 +80,7 @@
 		<!--			{{ $t('Please back up your data in storage, otherwise the data may be lost.') }}-->
 		<!--		</div>-->
 		<div v-if="currentStep === 0"
-			 class="_has-background-red-default _has-text-white _is-normal is-flex is-align-items-center mb-4 pt-2 pb-2 _radius-line">
+			class="_has-background-red-default _has-text-white _is-normal is-flex is-align-items-center mb-4 pt-2 pb-2 _radius-line">
 			<div class="is-flex left ml-3 mr-2 is-align-items-center">
 				<b-icon custom-size="casa-19px" icon="warning-solid" pack="casa"></b-icon>
 			</div>
@@ -88,94 +90,94 @@
 			}}
 		</div>
 
-		<section v-if="currentStep > 0"
-				 class="notification is-overlay mb-0 pr-0 pl-0 pt-5 pb-4 non-backgroud">
+		<section v-if="currentStep > 0" class="notification is-overlay mb-0 pr-0 pl-0 pt-5 pb-4 non-backgroud">
 			<div v-if="currentStep === 1" class="is-flex is-align-items-center _is-normal">
 				{{
-					$t('This operation may clear all personal data and destroy the installed APPs.')
+					$t(
+						"This operation may clear all personal data and destroy the installed APPs."
+					)
 				}}
 			</div>
 			<template v-if="currentStep === 2">
 				<div class="font">
-					{{ $t('Enter "I AM SURE" to proceed with the operation.') }}
+					{{ $t(`Enter 'I AM SURE' to proceed with the operation.`) }}
 				</div>
 				<b-input ref="inputPassword" v-model="password" class="mt-4" password-reveal
-						 @keyup.enter.native="verifyOperate(password)"></b-input>
+					@keyup.enter.native="verifyOperate(password)"></b-input>
 			</template>
 			<div v-if="currentStep === 3" class="is-flex is-align-items-center font">
 				<div class="message-danger left mr-2 is-flex is-align-items-center">
 					<b-icon class="is-38x38" custom-size="is-size-2" icon="information-outline" pack="casa"></b-icon>
 				</div>
-				{{ $t('APPs is running') + ` , ` + $t('restart APPs to continue.') }}
+				{{ $t("APPs is running") + ` , ` + $t("restart APPs to continue.") }}
 			</div>
 			<div v-if="currentStep === 4" class="is-flex is-align-items-center font">
 				<div class="message-danger left mr-2 is-flex is-align-items-center">
 					<b-icon class="is-38x38" custom-size="is-size-2" icon="warning-solid" pack="casa"></b-icon>
 				</div>
-				{{ runName + $t(' is running, restart ') + runName + $t(' to continue.') }}
+				{{
+					runName + $t(" is running, restart ") + runName + $t(" to continue.")
+				}}
 			</div>
 		</section>
 
 		<footer class="is-flex is-align-items-center mb-4">
 			<div class="is-flex-grow-1">
 				<a v-show="currentStep === 0"
-				   href="https://docs.zimaboard.com/docs/Small-body-Big-applications-OMV-install.html"
-				   target="_blank">{{
-						$t("Other ways to merge storages")
-					}}</a>
+					href="https://docs.zimaboard.com/docs/Small-body-Big-applications-OMV-install.html" target="_blank">{{
+						$t("Other ways to merge storages") }}</a>
 			</div>
 			<div class="mr-4">
 				<b-button v-show="currentStep > 2 || currentStep === 1" :label="$t('Cancel')"
-						  class="_has-background-gray-100" expaned rounded
-						  @click="currentStep = 0"/>
+					class="_has-background-gray-100" expaned rounded @click="currentStep = 0" />
 			</div>
 			<div>
 				<b-button v-show="currentStep === 0" :disabled="disableMergeButton" :label="$t(affirm)"
-						  :loading="isConnecting" expaned
-						  rounded type="is-primary" @click="test"/>
+					:loading="isConnecting" expaned rounded type="is-primary" @click="test" />
 				<b-button v-show="currentStep === 1" :label="$t(affirm)" :loading="isConnecting"
-						  class="_has-background-red-default is-rounded _has-text-white" expaned
-						  @click="currentStep = 2"/>
+					class="_has-background-red-default is-rounded _has-text-white" expaned @click="currentStep = 2" />
 				<b-button v-show="currentStep === 2" :label="$t(affirm)" :loading="isConnecting" expaned rounded
-						  type="is-primary" @click="verifyOperate(password)"/>
+					type="is-primary" @click="verifyOperate(password)" />
 				<b-button v-show="currentStep === 3" :label="$t(affirm)" :loading="isConnecting" expaned rounded
-						  type="is-primary" @click="restart"/>
+					type="is-primary" @click="restart" />
 				<b-button v-show="currentStep === 4" :label="$t(affirm)" :loading="isConnecting" expaned rounded
-						  type="is-primary" @click="restart"/>
+					type="is-primary" @click="restart" />
 			</div>
 		</footer>
 	</div>
 </template>
 
 <script>
-import {mixin}    from "@/mixins/mixin";
-import events     from '@/events/events';
-import cToolTip   from '@/components/basicComponents/tooltip/tooltip.vue';
-import filter     from 'lodash/filter';
-import isEqual    from 'lodash/isEqual';
-import {ice_i18n} from "@/mixins/base/common-i18n";
+import { mixin } from "@/mixins/mixin";
+import events from "@/events/events";
+import cToolTip from "@/components/basicComponents/tooltip/tooltip.vue";
+import filter from "lodash/filter";
+import isEqual from "lodash/isEqual";
+import { ice_i18n } from "@/mixins/base/common-i18n";
 
 export default {
 	name: "MergeStorages",
 	mixins: [mixin],
-	inject: ['OS'],
+	inject: ["OS"],
 	components: {
-		cToolTip
+		cToolTip,
 	},
 	async created() {
 		let mergeStorageList;
 		try {
-			mergeStorageList = await this.$api.local_storage.getMergerfsInfo().then((res) => {
-				return res.data.data[0]['source_volume_uuids']
-			})
+			mergeStorageList = await this.$api.local_storage
+				.getMergerfsInfo()
+				.then((res) => {
+					return res.data.data[0]["source_volume_uuids"];
+				});
 		} catch (e) {
-			console.log(e)
-			mergeStorageList = []
+			console.log(e);
+			mergeStorageList = [];
 		}
-		this.mergeStorageList.push(...mergeStorageList)
-		this.checkBoxGroup.push(...mergeStorageList)
+		this.mergeStorageList.push(...mergeStorageList);
+		this.checkBoxGroup.push(...mergeStorageList);
 		await this.getDiskList();
-		this.tempCheckBox = [...this.checkBoxGroup, ...this.checkBoxMissGroup]
+		this.tempCheckBox = [...this.checkBoxGroup, ...this.checkBoxMissGroup];
 	},
 	watch: {
 		// 0 default :mainstorage settings
@@ -207,16 +209,18 @@ export default {
 				default:
 					break;
 			}
-
-		}
+		},
 	},
 	computed: {
 		extended() {
-			return this.checkBoxGroup.join(":")
+			return this.checkBoxGroup.join(":");
 		},
 		disableMergeButton() {
 			// the value is false while checkBox has changed.
-			return isEqual([...this.checkBoxGroup, ...this.checkBoxMissGroup], this.tempCheckBox)
+			return isEqual(
+				[...this.checkBoxGroup, ...this.checkBoxMissGroup],
+				this.tempCheckBox
+			);
 		},
 	},
 	data() {
@@ -232,12 +236,12 @@ export default {
 			title: "Merge Storages",
 			affirm: "Submit",
 			mergeInfo: [],
-			password: '',
-			runName: '',
+			password: "",
+			runName: "",
 			notEmpty: false,
 			mergeStorageList: [],
 			tempCheckBox: [],
-		}
+		};
 	},
 	methods: {
 		/**
@@ -249,34 +253,34 @@ export default {
 			// TODO: the part is repetition
 			//  with APPs Installation Location requirement document
 			// const storageRes = await this.$api.storage.list({system: "show"})
-			const storageRes = await this.$api.storage.list()
-			const storageArray = []
-			const storageMissArray = []
-			let testMergeMiss = this.mergeStorageList
-			storageRes.data.data.forEach(item => {
-				item.children.forEach(part => {
-					part.disk = item.path
-					part.diskName = item.disk_name
-					storageArray.push(part)
-					testMergeMiss = testMergeMiss.filter(v => v !== part.uuid)
-				})
-			})
+			const storageRes = await this.$api.storage.list();
+			const storageArray = [];
+			const storageMissArray = [];
+			let testMergeMiss = this.mergeStorageList;
+			storageRes.data.data.forEach((item) => {
+				item.children.forEach((part) => {
+					part.disk = item.path;
+					part.diskName = item.disk_name;
+					storageArray.push(part);
+					testMergeMiss = testMergeMiss.filter((v) => v !== part.uuid);
+				});
+			});
 			this.checkBoxMissGroup.push(...testMergeMiss);
-			testMergeMiss.forEach(item => {
+			testMergeMiss.forEach((item) => {
 				storageMissArray.push({
-					"uuid": "",
-					"mount_point": "",
-					"size": "",
-					"avail": "",
-					"type": "",
-					"path": item,
-					"drive_name": "",
-					"label": "",
-					"persisted_in": "",
-					"disk": "",
-					"diskName": ""
-				})
-			})
+					uuid: "",
+					mount_point: "",
+					size: "",
+					avail: "",
+					type: "",
+					path: item,
+					drive_name: "",
+					label: "",
+					persisted_in: "",
+					disk: "",
+					diskName: "",
+				});
+			});
 
 			this.storageData = storageArray.map((storage) => {
 				return {
@@ -286,14 +290,14 @@ export default {
 					fsType: storage.type,
 					size: storage.size,
 					availSize: storage.avail,
-					usePercent: 100 - Math.floor(storage.avail * 100 / storage.size),
+					usePercent: 100 - Math.floor((storage.avail * 100) / storage.size),
 					diskName: storage.drive_name,
 					path: storage.path,
 					mount_point: storage.mount_point,
 					disk: storage.disk,
 					persistedIn: storage.persisted_in,
-				}
-			})
+				};
+			});
 
 			this.storageMissData = storageMissArray.map((storage) => {
 				return {
@@ -303,14 +307,14 @@ export default {
 					fsType: storage.type,
 					size: storage.size,
 					availSize: storage.avail,
-					usePercent: 100 - Math.floor(storage.avail * 100 / storage.size),
+					usePercent: 100 - Math.floor((storage.avail * 100) / storage.size),
 					diskName: storage.drive_name,
 					path: storage.path,
 					mount_point: storage.mount_point,
 					disk: storage.disk,
 					persistedIn: storage.persisted_in,
-				}
-			})
+				};
+			});
 		},
 
 		/**
@@ -319,181 +323,209 @@ export default {
 		 */
 		updateMerge(dockerInfo) {
 			// update merge api
-			this.$api.local_storage.updateMergerfsInfo({
-				"fstype": "fuse.mergerfs",
-				"mount_point": "/DATA",
-				"source_volume_uuids": [
-					...this.checkBoxGroup, ...this.checkBoxMissGroup
-				]
-			}).then(res => {
-				// started all containers
-				Promise.all(dockerInfo.map(async item => {
-					if (item.app_type === "v2app") {
-						await this.$openAPI.appCompose.setComposeAppStatus(item.name, "start")
-					} else {
-						await this.$api.container.updateState(item.name, "start")
-					}
-				})).then(() => {
-					this.$buefy.toast.open({
-						message: 'Merge Storages Success',
-						type: 'is-success',
-						position: 'is-top',
-						duration: 5000,
-						queue: true,
-						indefinite: false
-					})
-					this.$emit("update", true);
-					this.$EventBus.$emit(events.RELOAD_APP_LIST)
-				}).catch(e => {
+			this.$api.local_storage
+				.updateMergerfsInfo({
+					fstype: "fuse.mergerfs",
+					mount_point: "/DATA",
+					source_volume_uuids: [
+						...this.checkBoxGroup,
+						...this.checkBoxMissGroup,
+					],
+				})
+				.then((res) => {
+					// started all containers
+					Promise.all(
+						dockerInfo.map(async (item) => {
+							if (item.app_type === "v2app") {
+								await this.$openAPI.appCompose.setComposeAppStatus(
+									item.name,
+									"start"
+								);
+							} else {
+								await this.$api.container.updateState(item.name, "start");
+							}
+						})
+					)
+						.then(() => {
+							this.$buefy.toast.open({
+								message: "Merge Storages Success",
+								type: "is-success",
+								position: "is-top",
+								duration: 5000,
+								queue: true,
+								indefinite: false,
+							});
+							this.$emit("update", true);
+							this.$EventBus.$emit(events.RELOAD_APP_LIST);
+						})
+						.catch((e) => {
+							this.$buefy.toast.open({
+								message: e.response.data.data || e.response.data.message,
+								type: "is-danger",
+								position: "is-top",
+								duration: 5000,
+							});
+							console.error(e);
+						})
+						.then(() => {
+							// TODO : need to check the result by the states code
+							switch (res.status) {
+								case 200:
+								case 400:
+								default:
+									this.isConnecting = false;
+									// refresh local storage
+									this.$EventBus.$emit(events.RELOAD_MOUNT_LIST);
+									// close the modal
+									this.$emit("close");
+							}
+						});
+				});
+		},
+		// get the storage list be mounted of mergerfs
+		cancel() {
+			this.$emit("close");
+		},
+		async test() {
+			this.isConnecting = true;
+			// submit
+			this.$messageBus("storagemanager_mergestorage");
+			// this.notEmpty = await this.$api.folder.getFolderSize('/DATA').then(res => {
+			this.notEmpty = await this.$openAPI.iceFolder
+				.getFolderInfo("/DATA", true)
+				.then((res) => {
+					return res.data?.[0].size > 4 * 1024;
+				})
+				.catch((e) => {
 					this.$buefy.toast.open({
 						message: e.response.data.data || e.response.data.message,
 						type: "is-danger",
 						position: "is-top",
 						duration: 5000,
 					});
-					console.error(e)
-				}).then(() => {
-					// TODO : need to check the result by the states code
-					switch (res.status) {
-						case 200:
-						case 400:
-						default:
-							this.isConnecting = false
-							// refresh local storage
-							this.$EventBus.$emit(events.RELOAD_MOUNT_LIST)
-							// close the modal
-							this.$emit('close')
-					}
+					console.error(e);
 				})
-			})
-		}
-		,
-
-		// get the storage list be mounted of mergerfs
-		cancel() {
-			this.$emit('close')
-		},
-		async test() {
-			this.isConnecting = true
-			// submit
-			this.$messageBus('storagemanager_mergestorage');
-			// this.notEmpty = await this.$api.folder.getFolderSize('/DATA').then(res => {
-			this.notEmpty = await this.$openAPI.iceFolder.getFolderInfo('/DATA', true).then(res => {
-				return res.data?.[0].size > 4 * 1024;
-			}).catch(e => {
-				this.$buefy.toast.open({
-					message: e.response.data.data || e.response.data.message,
-					type: "is-danger",
-					position: "is-top",
-					duration: 5000,
+				.then(() => {
+					this.isConnecting = false;
 				});
-				console.error(e)
-			}).then(() => {
-				this.isConnecting = false
-			})
 			// business :: If storage is empty, no reminder
 			if (this.notEmpty) {
-				this.title = "Reset Warning"
-				this.affirm = "Reset"
-				this.currentStep = 1
+				this.title = "Reset Warning";
+				this.affirm = "Reset";
+				this.currentStep = 1;
 			} else {
-				this.submit()
+				this.submit();
 			}
 		},
 		//
 		async submit(e, nextStep = false) {
 			// operation : split the mergerfs
-			let notSplit = this.mergeStorageList.every(item => this.checkBoxGroup.includes(item) || this.checkBoxMissGroup.includes(item))
+			let notSplit = this.mergeStorageList.every(
+				(item) =>
+					this.checkBoxGroup.includes(item) ||
+					this.checkBoxMissGroup.includes(item)
+			);
 			if (notSplit || nextStep) {
 				// get docker info
-				let dockerInfo = await this.$openAPI.appGrid.getAppGrid().then(res => res.data.data || [])
-				dockerInfo = filter(dockerInfo, {status: "running"})
+				let dockerInfo = await this.$openAPI.appGrid
+					.getAppGrid()
+					.then((res) => res.data.data || []);
+				dockerInfo = filter(dockerInfo, { status: "running" });
 				if (this.notEmpty) {
-					this.restart()
-					return
+					this.restart();
+					return;
 				} else if (dockerInfo.length === 1) {
-					this.currentStep = 4
-					this.runName = ice_i18n(dockerInfo[0].title)
-					return
+					this.currentStep = 4;
+					this.runName = ice_i18n(dockerInfo[0].title);
+					return;
 				} else if (dockerInfo.length > 1) {
-					this.currentStep = 3
-					this.runName = dockerInfo.map(item => ice_i18n(item.title)).join(',')
-					return
+					this.currentStep = 3;
+					this.runName = dockerInfo
+						.map((item) => ice_i18n(item.title))
+						.join(",");
+					return;
 				} else {
-					this.restart()
-					return
+					this.restart();
+					return;
 				}
 			}
-			this.currentStep = 2
+			this.currentStep = 2;
 		},
 
 		async restart() {
-			this.isConnecting = true
+			this.isConnecting = true;
 			try {
 				//business :: all apps to restarted.
 				// 1、 获取应用信息，主要是运行中的应用. 2、关闭应用 3、合并磁盘 4、启动应用
-				let dockerInfo = await this.$openAPI.appGrid.getAppGrid().then(res => res.data.data || [])
-				dockerInfo = filter(dockerInfo, {status: "running"})
-				const container = this.$api.container
-				const compose = this.$openAPI.appCompose
-				Promise.all(dockerInfo.map(async item => {
-					if (item.app_type === "v2app") {
-						await compose.setComposeAppStatus(item.name, 'stop')
-					} else {
-						await container.updateState(item.name, "stop")
-					}
-				})).then(() => {
-					this.$api.local_storage.getInitMergerfsStatus().then(res => {
-						if (res.data.data !== 'initialized') {
-							this.$api.local_storage.initMergerfs({"mount_point": "/DATA"}).then(() => {
-								this.updateMerge(dockerInfo)
-							}).catch(e => {
-								this.isConnecting = false
-								this.$buefy.toast.open({
-									message: e.response.data.data || e.response.data.message,
-									type: "is-danger",
-									position: "is-top",
-									duration: 5000,
-								});
-								console.error(e)
-							})
+				let dockerInfo = await this.$openAPI.appGrid
+					.getAppGrid()
+					.then((res) => res.data.data || []);
+				dockerInfo = filter(dockerInfo, { status: "running" });
+				const container = this.$api.container;
+				const compose = this.$openAPI.appCompose;
+				Promise.all(
+					dockerInfo.map(async (item) => {
+						if (item.app_type === "v2app") {
+							await compose.setComposeAppStatus(item.name, "stop");
 						} else {
-							this.updateMerge(dockerInfo)
+							await container.updateState(item.name, "stop");
 						}
 					})
-				}).catch((e) => {
-					this.isConnecting = false
-					this.$buefy.toast.open({
-						duration: 5000,
-						message: e.response.data.data || e.response.data.message,
-						position: "is-top",
-						type: 'is-danger'
+				)
+					.then(() => {
+						this.$api.local_storage.getInitMergerfsStatus().then((res) => {
+							if (res.data.data !== "initialized") {
+								this.$api.local_storage
+									.initMergerfs({ mount_point: "/DATA" })
+									.then(() => {
+										this.updateMerge(dockerInfo);
+									})
+									.catch((e) => {
+										this.isConnecting = false;
+										this.$buefy.toast.open({
+											message: e.response.data.data || e.response.data.message,
+											type: "is-danger",
+											position: "is-top",
+											duration: 5000,
+										});
+										console.error(e);
+									});
+							} else {
+								this.updateMerge(dockerInfo);
+							}
+						});
 					})
-					console.error(e)
-				}).finally(() => {
-					this.currentStep = 0
-				})
+					.catch((e) => {
+						this.isConnecting = false;
+						this.$buefy.toast.open({
+							duration: 5000,
+							message: e.response.data.data || e.response.data.message,
+							position: "is-top",
+							type: "is-danger",
+						});
+						console.error(e);
+					})
+					.finally(() => {
+						this.currentStep = 0;
+					});
 			} catch (e) {
-				console.log(e)
+				console.log(e);
 			}
-
 		},
 
 		verifyOperate(content) {
 			if (content === "I AM SURE") {
 				this.submit(null, true);
-				return
+				return;
 			}
 			this.$buefy.toast.open({
 				duration: 5000,
 				message: this.$t("Incorrect input."),
-				type: 'is-danger'
-			})
-		}
-
-	}
-	,
-}
+				type: "is-danger",
+			});
+		},
+	},
+};
 </script>
 
 <style lang="scss" scoped>
@@ -529,33 +561,33 @@ export default {
 ._is-normal {
 	/* Text 400Regular/Text03 */
 
-	font-family: 'Roboto';
+	font-family: "Roboto";
 	font-style: normal;
 	font-weight: 400;
 	font-size: 14px;
 	line-height: 20px;
 	/* identical to box height, or 143% */
 
-	font-feature-settings: 'pnum' on, 'lnum' on;
+	font-feature-settings: "pnum" on, "lnum" on;
 }
 
 ._is-text-emphasis-03 {
 	/* Text 500Medium/Text03 */
 
-	font-family: 'Roboto';
+	font-family: "Roboto";
 	font-style: normal;
 	font-weight: 500;
 	font-size: 14px;
 	line-height: 20px;
 	/* identical to box height, or 143% */
 
-	font-feature-settings: 'pnum' on, 'lnum' on;
+	font-feature-settings: "pnum" on, "lnum" on;
 }
 
 ._is-text-full-03 {
 	/* Text 400Regular/Text03 */
 
-	font-family: 'Roboto';
+	font-family: "Roboto";
 	font-style: normal;
 	font-weight: 400;
 	font-size: 14px;
@@ -563,7 +595,7 @@ export default {
 	/* identical to box height, or 143% */
 
 	text-align: right;
-	font-feature-settings: 'pnum' on, 'lnum' on;
+	font-feature-settings: "pnum" on, "lnum" on;
 }
 
 ._has-text-gray-800 {
@@ -599,7 +631,7 @@ export default {
 
 ._has-background-yellow-default {
 	/* Red/Default */
-	background: hsla(44, 98%, 46%, 1)
+	background: hsla(44, 98%, 46%, 1);
 }
 
 ._has-background-gray-100 {

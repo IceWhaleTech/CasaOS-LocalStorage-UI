@@ -1,7 +1,7 @@
 <!--
-  * @LastEditors: zhanghengxin ezreal.zhang@icewhale.org
-  * @LastEditTime: 2023/1/6 下午3:05
-  * @FilePath: /CasaOS-UI/src/components/Storage/StorageItem.vue
+ * @LastEditors: zhanghengxin ezreal.zhang@icewhale.org
+ * @LastEditTime: 2023-09-07 14:52:49
+ * @FilePath: /CasaOS-LocalStorage-UI/src/components/Storage/StorageItem.vue
   * @Description:
   *
   * Copyright (c) 2022 by IceWhale, All Rights Reserved.
@@ -16,7 +16,7 @@
 			<div class="ml-3 is-flex-grow-1 is-flex is-align-items-center">
 				<div>
 					<h4 class="mb-0 has-text-left one-line has-text-emphasis-02 is-flex is-align-items-center">
-						{{ item.name }}
+						{{ displayStorageName(item.name) }}
 						<b-tag v-if="item.isSystem" class="ml-2 has-text-full-04">OS
 						</b-tag>
 					</h4>
@@ -81,47 +81,49 @@ export default {
 
 			this.$buefy.dialog.prompt({
 				title: this.$t('Remove'),
-				message: this.$t('Enter the password to continue:'),
+				message: this.$t(`Enter 'I AM SURE' to proceed with the operation.`),
 				inputAttrs: {
-					type: "password"
+					type: "confirm"
 				},
 				trapFocus: true,
 				confirmText: this.$t('OK'),
 				cancelText: this.$t('Cancel'),
+				closeOnConfirm: false,
 				onCancel: () => {
 					this.isRemoving = false;
 				},
-				onConfirm: (value) => {
+				onConfirm: (confirm,{close}) => {
+					if(confirm !== `I AM SURE`){
+						this.$buefy.toast.open({
+							duration: 3000,
+							message: this.$t('Incorrect input'),
+							type: 'is-danger'
+						})
+						return;
+					}
 					let data = {
-						path: path,
-						password: value
+						path: path
 					}
 
 					this.$api.disks.umount(data).then((res) => {
 						if (res.data.success !== 200) {
-							this.isRemoving = false;
 							this.$buefy.toast.open({
 								duration: 3000,
 								message: res.data.message,
 								type: 'is-danger'
 							})
-							console.error(res);
 						} else {
-							this.isRemoving = false;
-							let _this = this
-							delay(() => {
-								_this.isRemoving = false;
-								_this.$emit('getDiskList');
-							}, 1000);
+							this.$emit('getDiskList');
 						}
 					}).catch(e => {
-						this.isRemoving = false;
 						this.$buefy.toast.open({
 							duration: 3000,
 							message: e.response.data.message,
 							type: 'is-danger'
 						})
-						console.error(e)
+					}).finally(() => {
+						this.isRemoving = false;
+						close()
 					})
 				}
 			})
@@ -178,7 +180,9 @@ export default {
 				}
 			})
 		},
-
+		displayStorageName(name){
+			return (name === "System" && this.isZIMA) ? "Zima HD" : name ?? this.$t('undefined');
+		},
 	},
 }
 </script>
