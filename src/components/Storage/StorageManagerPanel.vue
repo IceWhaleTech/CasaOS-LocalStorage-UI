@@ -1,6 +1,6 @@
 <!--
  * @LastEditors: zhanghengxin ezreal.zhang@icewhale.org
- * @LastEditTime: 2023-09-14 19:03:38
+ * @LastEditTime: 2023-09-18 14:42:01
  * @FilePath: /CasaOS-LocalStorage-UI/src/components/Storage/StorageManagerPanel.vue
   * @Description:
   *
@@ -17,7 +17,7 @@
 					<button class="delete" type="button" @click="close"/>
 				</div>
 			</header>
-			<section :class="{ 'b-line': storageData.length > 0 && activeTab === 0}" class="pr-5 pl-5 mt-4 pb-2 max-height">
+			<section :class="{ 'b-line': storageData.length > 0 && activeTab === 0}" class="pr-5 pl-5 mt-4 pb-2">
 				<!-- Storage and Disk List Start -->
 				<div class="is-flex-grow-1 is-relative">
 					<div v-if="activeTab === 1" class="create-container">
@@ -39,7 +39,7 @@
 									class="scrollbars-light-auto tab-item">
 							<MergeStorages @update="()=> {getDiskList(); activeTab = 1;}"></MergeStorages>
 						</b-tab-item>
-						<b-tab-item :label="$t('Storage')" class="scrollbars-light-auto tab-item">
+						<b-tab-item :label="$t('Storage')" class="scrollbars-light-auto tab-item max-height">
 							<storage-combination :storageData="mergeCombinationsStorageData"
 												 :type="state_mainstorage_operability"
 												 @reload="getDiskList"></storage-combination>
@@ -61,7 +61,7 @@
 										@click=""></b-icon>
 							</div>
 						</b-tab-item>
-						<b-tab-item :label="$t('Drive')" class="scrollbars-light-auto tab-item">
+						<b-tab-item :label="$t('Drive')" class="scrollbars-light-auto tab-item max-height">
 							<drive-item v-for="(item, index) in diskData" :key="'disk' + index"
 										:item="item"></drive-item>
 							<div v-if="diskData.length === 1"
