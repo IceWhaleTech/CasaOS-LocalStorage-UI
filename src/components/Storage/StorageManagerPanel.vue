@@ -1,6 +1,6 @@
 <!--
  * @LastEditors: zhanghengxin ezreal.zhang@icewhale.org
- * @LastEditTime: 2023-09-18 14:42:01
+ * @LastEditTime: 2023-09-18 18:33:48
  * @FilePath: /CasaOS-LocalStorage-UI/src/components/Storage/StorageManagerPanel.vue
   * @Description:
   *
@@ -11,8 +11,8 @@
 
 		<!-- Modal-Card Body Start -->
 		<template v-if="!CreatingStoragePanelIsShow">
-			<header class="pl-5 pr-5 mt-4 pt-1 b-line">
-				<h3 class="title is-3 mb-3">{{ $t('Storage Manager') }}</h3>
+			<header class="pl-5 pr-5 mt-4 pb-2 b-line">
+				<h3 class="title is-3 pt-1 mb-0 is-align-items-center">{{ $t('Storage Manager') }}</h3>
 				<div class="close-container">
 					<button class="delete" type="button" @click="close"/>
 				</div>
