@@ -1,6 +1,6 @@
 <!--
  * @LastEditors: zhanghengxin ezreal.zhang@icewhale.org
- * @LastEditTime: 2023-09-14 16:03:24
+ * @LastEditTime: 2023-09-18 18:33:43
  * @FilePath: /CasaOS-LocalStorage-UI/src/components/Storage/CreatingStoragePanel.vue
   * @Description:
   *
@@ -176,8 +176,8 @@ function displayPartitionInfo(item, itemIndex){
 <template>
 	<div>
 		<template v-if="!isCreating">
-			<header class="pl-5 pr-5 mt-4 pt-1 b-line">
-				<h3 class="title is-3 mb-3">{{ $t('Create Storage') }}</h3>
+			<header class="pl-5 pr-5 mt-4 pb-2 b-line">
+				<h3 class="title is-3 pt-1 mb-0 is-align-items-center">{{ $t('Create Storage') }}</h3>
 				<div class="close-container">
 					<button class="delete" type="button" @click="$emit('close')"/>
 				</div>
