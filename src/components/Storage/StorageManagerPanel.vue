@@ -112,6 +112,8 @@ import events               from '@/events/events';
 import MergeStorages        from '@/components/Storage/MergeStorages.vue';
 import CreatingStoragePanel from './CreatingStoragePanel.vue';
 import { MIRCO_APP_ACTION_ENUM } from "@/const/index.js";
+import  maxBy  					 from 'lodash/maxBy';
+import  filter  				 from 'lodash/filter';
 
 export default {
 	name: "storage-manager-panel",
@@ -242,7 +244,16 @@ export default {
 
 			try {
 				// get storage list info
-				const storageRes = await this.$api.storage.list({system: "show"}).then(v => v.data.data)
+				const storageRes = await this.$api.storage.list({system: "show"}).then(v => {
+					const storage = v.data.data;
+					const systemStorage = storage.filter(item => item.disk_name === 'System')[0];
+					if(systemStorage.children){
+						const maxA = maxBy(systemStorage.children, 'size').size;
+						const filtered = filter(systemStorage.children, item => item.size === maxA);
+						systemStorage.children = filtered;
+					}
+					return storage;
+				})
 				let storageArray = []
 				let mergeCombinations = []
 				let testMergeMiss = mergeStorageList

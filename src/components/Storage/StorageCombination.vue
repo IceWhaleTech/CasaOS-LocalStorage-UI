@@ -31,16 +31,16 @@
 									$t('Single Drive Storage')
 								}},
 								<span
-								class="is-uppercase">{{ item.fsType || $t('undefined') }}</span>
-								<b-tooltip
+								class="is-uppercase">{{ item.fsType ?? $t('undefined') }}</span>
+								<!-- <b-tooltip
 								:label="$t('CasaOS reserves 1% of file space when creating storage in EXT4 format.')"
 								append-to-body>
 									<b-icon class="mr-2 " icon="help-circle-outline" size="is-small"></b-icon>
-								</b-tooltip>
+								</b-tooltip> -->
 							</p>
 							<p class="has-text-left has-text-full-04 mt-1">{{
 									$t("Available Total", {
-										name: item.diskName || $t('undefined'),
+										name: item.diskName ?? $t('undefined'),
 										avl: renderSize(item.availSize),
 										total: renderSize(item.size)
 									})
