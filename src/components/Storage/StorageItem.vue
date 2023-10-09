@@ -134,7 +134,7 @@ export default {
 
 			this.$buefy.dialog.prompt({
 				title: this.$t('Format'),
-				message: this.$t('Enter the password to continue:'),
+				message: this.$t("Enter 'I AM SURE' to proceed with the operation."),
 				inputAttrs: {
 					type: "password"
 				},
