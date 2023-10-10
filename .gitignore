@@ -1,6 +1,6 @@
 ### VisualStudioCode template
-.vscode/*
-.idea
+.vscode/
+.idea/
 
 # Local History for Visual Studio Code
 .history/
@@ -11,12 +11,7 @@
 ### yarn template
 # https://yarnpkg.com/getting-started/qa#which-files-should-be-gitignored
 
-.yarn/*
-!.yarn/releases
-!.yarn/patches
-!.yarn/plugins
-!.yarn/sdks
-!.yarn/versions
+.yarn/
 
 # and uncomment the following lines
 # .pnp.*
