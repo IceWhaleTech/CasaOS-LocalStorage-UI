@@ -8,15 +8,6 @@
 
  */
 
-/*
- * @Author: JerryK
- * @Date: 2021-09-18 21:32:13
- * @LastEditors: Jerryk jerry@icewhale.org
- * @LastEditTime: 2023-02-06 17:39:23
- * @Description:
- * @FilePath: /CasaOS-UI/src/service/api.js
- */
-
 import container     from './container.js';
 import disks         from './disks.js';
 import storage       from './storage.js';

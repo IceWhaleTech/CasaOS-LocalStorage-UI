@@ -8,14 +8,6 @@
 
  */
 
-/*
- * @Author: JerryK
- * @Date: 2021-09-18 21:32:13
- * @LastEditors: Jerryk jerry@icewhale.org
- * @LastEditTime: 2022-08-11 17:16:42
- * @Description: Disk API
- * @FilePath: \CasaOS-UI\src\service\disks.js
- */
 import {api} from "./service.js";
 
 const PREFIX = "/disks";
@@ -28,6 +20,10 @@ const disks = {
 
 	umount(data) {
 		return api.delete(`${PREFIX}`, data);
-	}
+	},
+
+	getSize(data){
+		return api.get(`${PREFIX}/size`, data);
+	},
 }
 export default disks;

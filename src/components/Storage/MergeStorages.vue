@@ -29,7 +29,7 @@
 				</div>
 				<div class="is-flex is-flex-shrink-0 is-flex-direction-column is-justify-content-center mr-2">
 					<span class="is-uppercase _is-text-full-03 _has-text-gray-600">
-						{{ 
+						{{
 							renderSize(item.size - item.availSize)
 						}}/{{
 							renderSize(item.size)
@@ -390,24 +390,26 @@ export default {
 			this.isConnecting = true;
 			// submit
 			this.$messageBus("storagemanager_mergestorage");
-			// this.notEmpty = await this.$api.folder.getFolderSize('/DATA').then(res => {
-			this.notEmpty = await this.$openAPI.iceFolder
-				.getFolderInfo("/DATA", true)
-				.then((res) => {
+			try {
+				this.notEmpty = await this.$api.disks.getSize({ path: '/DATA' }).then(res => {
+					// this.notEmpty = await this.$openAPI.iceFolder
+					// 	.getFolderInfo("/DATA", true)
+					// 	.then((res) => {
 					return res.data?.[0].size > 4 * 1024;
 				})
-				.catch((e) => {
-					this.$buefy.toast.open({
-						message: e.response.data.data || e.response.data.message,
-						type: "is-danger",
-						position: "is-top",
-						duration: 5000,
+					.finally(() => {
+						this.isConnecting = false;
 					});
-					console.error(e);
-				})
-				.then(() => {
-					this.isConnecting = false;
+			} catch (e) {
+				this.$buefy.toast.open({
+					message: e.response.data.data || e.response.data.message,
+					type: "is-danger",
+					position: "is-top",
+					duration: 5000,
 				});
+				console.error(e);
+				return e;
+			}
 			// business :: If storage is empty, no reminder
 			if (this.notEmpty) {
 				this.title = "Reset Warning";
