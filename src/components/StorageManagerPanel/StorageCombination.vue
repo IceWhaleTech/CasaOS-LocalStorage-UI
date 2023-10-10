@@ -68,7 +68,7 @@
 
 <script>
 import {mixin}       from '@/mixins/mixin';
-import MergeStorages from "@/components/Tab/MergeManager.vue";
+import MergeStorages from "@/components/MergeManagerPanel/MergeManagerPanel.vue";
 import cToolTip      from "@/components/basicComponents/tooltip/tooltip.vue";
 
 export default {

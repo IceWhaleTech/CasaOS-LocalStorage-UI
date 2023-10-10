@@ -14,7 +14,7 @@
 import {mixin}              from './mixins/mixin';
 import {computed}           from 'vue'
 import {ConfigProgrammatic} from 'buefy/src/index.js'
-import StorageManagerPanel  from '@/components/Storage/StorageManagerPanel.vue'
+import StorageManagerPanel  from '@/components/StorageManagerPanel/StorageManagerPanel.vue'
 
 const customIconConfig = {
 	customIconPacks: {

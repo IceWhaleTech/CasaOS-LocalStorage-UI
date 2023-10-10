@@ -103,14 +103,14 @@ import smoothReflow         from 'vue-smooth-reflow'
 import delay                from 'lodash/delay';
 import max                  from 'lodash/max';
 import {mixin}              from '@/mixins/mixin';
-import DriveItem            from './Storage/DriveItem.vue'
-import StorageItem          from './Storage/StorageItem.vue'
+import DriveItem            from '../DriveManagerPanel/DriveItem.vue'
+import StorageItem          from './StorageItem.vue'
 import Popper               from 'vue-popperjs';
-import StorageCombination   from "./Storage/StorageCombination.vue";
+import StorageCombination   from "./StorageCombination.vue";
 import cToolTip             from '@/components/basicComponents/tooltip/tooltip.vue';
 import events               from '@/events/events';
-import MergeStorages        from '@/components/Tab/MergeManager.vue';
-import CreatingStoragePanel from './Storage/CreatingStoragePanel.vue';
+import MergeStorages        from '@/components/MergeManagerPanel/MergeManagerPanel.vue';
+import CreatingStoragePanel from './CreatingStoragePanel.vue';
 import { MIRCO_APP_ACTION_ENUM } from "@/const";
 import  maxBy  					 from 'lodash/maxBy';
 import  filter  				 from 'lodash/filter';
@@ -393,7 +393,7 @@ export default {
 
 			this.$buefy.modal.open({
 				parent: this,
-				component: () => import('@/components/Tab/MergeManager.vue'),
+				component: () => import('@/components/MergeManagerPanel/MergeManagerPanel.vue'),
 				hasModalCard: true,
 				trapFocus: true,
 				ariaModal: true,

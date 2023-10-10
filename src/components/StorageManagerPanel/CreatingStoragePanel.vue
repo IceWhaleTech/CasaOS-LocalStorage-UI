@@ -133,7 +133,7 @@ function submitCreate(format) {
 				message: res.data.message,
 				type: 'is-danger'
 			})
-			
+
 			attentionTitle.value = "Attention"
 			if(format){
 				attentionMessage.value = `Storage space creation failed. Please try manually formatting before trying again.`
@@ -141,7 +141,7 @@ function submitCreate(format) {
 				attentionMessage.value = `Storage space creation failed. Please try formatting and creating again.`
 			}
 			attentionType.value = "is-danger"
-			
+
 			console.error(res.data.message)
 		} else {
 			$emit('refresh:DiskList', true)
@@ -234,8 +234,8 @@ function displayPartitionInfo(item, itemIndex){
 			<div class="installing-warpper mt-6 mb-6">
 				<div class="is-flex is-align-items-center is-justify-content-center mb-5">
 					<lottie-animation :animationData="require('@/assets/ani/creating.json')" :autoPlay="true"
-									  :loop="true"
-									  class="creating-animation"></lottie-animation>
+                                      :loop="true"
+                                      class="creating-animation"></lottie-animation>
 				</div>
 				<h3 class="title is-4 has-text-centered has-text-weight-light">{{ $t('Creation in progress') }}...</h3>
 			</div>

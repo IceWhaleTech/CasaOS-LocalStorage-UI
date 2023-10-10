@@ -3,7 +3,7 @@
  * @Date:  2022-09-13 17:01:37
  * @LastEditors: zhanghengxin ezreal.zhang@icewhale.org
  * @LastEditTime: 2023-09-15 16:18:12
- * @FilePath: /CasaOS-LocalStorage-UI/src/components/Storage/MergeManager.vue
+ * @FilePath: /CasaOS-LocalStorage-UI/src/components/Storage/MergeManagerPanel.vue
  * @Description:
  *
  * Copyright (c) 2022 by IceWhale, All Rights Reserved.
