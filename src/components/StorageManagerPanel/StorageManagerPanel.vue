@@ -422,7 +422,15 @@ export default {
 			});
 			// this.$emit('close:StorageManagerPanel')
 		},
-	}
+	},
+	sockets: {
+		"local-storage:disk:removed"(res){
+			this.getDiskList()
+		},
+		"local-storage:disk:added"(res){
+			this.getDiskList()
+		},
+	},
 }
 </script>
 
