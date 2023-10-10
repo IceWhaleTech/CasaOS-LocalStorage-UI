@@ -163,21 +163,7 @@ export default {
 		cToolTip,
 	},
 	async created() {
-		let mergeStorageList;
-		try {
-			mergeStorageList = await this.$api.local_storage
-				.getMergerfsInfo()
-				.then((res) => {
-					return res.data.data[0]["source_volume_uuids"];
-				});
-		} catch (e) {
-			console.log(e);
-			mergeStorageList = [];
-		}
-		this.mergeStorageList.push(...mergeStorageList);
-		this.checkBoxGroup.push(...mergeStorageList);
-		await this.getDiskList();
-		this.tempCheckBox = [...this.checkBoxGroup, ...this.checkBoxMissGroup];
+		await this.updateMergerfsInfo();
 	},
 	watch: {
 		// 0 default :mainstorage settings
@@ -356,6 +342,7 @@ export default {
 								indefinite: false,
 							});
 							this.$emit("update", true);
+							this.updateMergerfsInfo();
 							this.$EventBus.$emit(events.RELOAD_APP_LIST);
 						})
 						.catch((e) => {
@@ -524,6 +511,24 @@ export default {
 				type: "is-danger",
 			});
 		},
+
+		async updateMergerfsInfo(){
+			let mergeStorageList;
+			try {
+				mergeStorageList = await this.$api.local_storage
+					.getMergerfsInfo()
+					.then((res) => {
+						return res.data.data[0]["source_volume_uuids"];
+					});
+			} catch (e) {
+				console.log(e);
+				mergeStorageList = [];
+			}
+			this.mergeStorageList.push(...mergeStorageList);
+			this.checkBoxGroup.push(...mergeStorageList);
+			await this.getDiskList();
+			this.tempCheckBox = [...this.checkBoxGroup, ...this.checkBoxMissGroup];
+		}
 	},
 };
 </script>
