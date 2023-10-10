@@ -136,7 +136,7 @@ export default {
 				title: this.$t('Format'),
 				message: this.$t("Enter 'I AM SURE' to proceed with the operation."),
 				inputAttrs: {
-					type: "password"
+					type: "confirm"
 				},
 				trapFocus: true,
 				confirmText: this.$t('OK'),
@@ -145,10 +145,18 @@ export default {
 					this.isFormating = false;
 				},
 				onConfirm: (value) => {
+					if(value !== `I AM SURE`){
+						this.$buefy.toast.open({
+							duration: 3000,
+							message: this.$t('Incorrect input'),
+							type: 'is-danger'
+						})
+						this.isFormating = false;
+						return;
+					}
 					let data = {
 						path: path,
-						volume: mount_point,
-						password: value
+						volume: mount_point
 					}
 
 					this.$api.storage.format(data).then((res) => {
