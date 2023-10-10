@@ -62,5 +62,6 @@
   "The selected disk must be formatted before it can be used, all data will be erased.": "The selected disk must be formatted before it can be used, all data will be erased.",
   "The disk will be formatted as a single partition, all data will be erased.": "The disk will be formatted as a single partition, all data will be erased.",
   "Storage space creation failed. Please try formatting and creating again.": "Storage space creation failed. Please try formatting and creating again.",
-  "Storage space creation failed. Please try manually formatting before trying again.": "Storage space creation failed. Please try manually formatting before trying again."
+  "Storage space creation failed. Please try manually formatting before trying again.": "Storage space creation failed. Please try manually formatting before trying again.",
+  "Incorrect input.": "Incorrect input."
 }

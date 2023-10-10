@@ -96,7 +96,7 @@ export default {
 					if(confirm !== `I AM SURE`){
 						this.$buefy.toast.open({
 							duration: 3000,
-							message: this.$t('Incorrect input'),
+							message: this.$t('Incorrect input.'),
 							type: 'is-danger'
 						})
 						return;
@@ -148,7 +148,7 @@ export default {
 					if(value !== `I AM SURE`){
 						this.$buefy.toast.open({
 							duration: 3000,
-							message: this.$t('Incorrect input'),
+							message: this.$t('Incorrect input.'),
 							type: 'is-danger'
 						})
 						this.isFormating = false;
