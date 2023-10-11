@@ -21,7 +21,12 @@ jobs:
               uses: actions/setup-node@v3
               with:
                   node-version: ${{ matrix.node-version }}
-                  cache: 'npm'
+
+            - uses: pnpm/action-setup@v2
+              name: Install pnpm
+              with:
+                version: 8.6
+                run_install: false
 
             - name: install git
               run: sudo apt install --yes git
