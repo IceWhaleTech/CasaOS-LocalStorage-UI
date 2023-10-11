@@ -22,12 +22,6 @@ jobs:
               with:
                   node-version: ${{ matrix.node-version }}
                   cache: 'npm'
-            - name: '缓存 Cache'
-              uses: actions/cache@v3
-              id: cache-dependencies
-              with:
-                  path: node_modules
-                  key: ${{runner.OS}}-${{hashFiles('**/yarn.lock')}}
 
             - name: install git
               run: sudo apt install --yes git
@@ -49,8 +43,8 @@ jobs:
               run: echo ${{ env.VERSION }}
                 # run: echo ${{ steps.get_version.outputs.VERSION }}
 
-            - run: yarn install
-            - run: yarn build
+            - run: pnpm install
+            - run: pnpm build
             - run: |
                   tar -zcvf linux-all-icewhale-localstorage-ui-v99.99.99.tar.gz build
                   ls
