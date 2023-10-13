@@ -358,7 +358,7 @@ export default {
 			this.$messageBus("storagemanager_mergestorage");
 			try {
 				this.notEmpty = await this.$api.disks.getSize({ path: '/DATA' }).then(res => {
-					return res.data?.[0].size > 4 * 1024;
+					return res.data?.[0].used > 4 * 1024;
 				})
 					.finally(() => {
 						this.isConnecting = false;
