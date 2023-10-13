@@ -48,7 +48,7 @@
 				</b-button>
 			</div>
 			<p v-else-if="item.usePercent >= 80" class="has-text-right is-flex is-flex-direction-column-reverse">
-				<a href="https://wiki.casaos.io/zh/guides" target="_blank">{{ $t("Free up storage") }}</a>
+				<a href="https://wiki.casaos.io/zh/guides" target="_blank">{{ $t("Optimize Storage") }}</a>
 			</p>
 		</div>
 		<b-progress :type="item.usePercent | getProgressType" :value="item.usePercent || 0"
@@ -81,7 +81,7 @@ export default {
 
 			this.$buefy.dialog.prompt({
 				title: this.$t('Remove'),
-				message: this.$t(`Enter 'I AM SURE' to proceed with the operation.`),
+				message: this.$t(`Please type 'I CONFIRM' to proceed with disk removal.`),
 				inputAttrs: {
 					type: "confirm"
 				},
@@ -93,7 +93,7 @@ export default {
 					this.isRemoving = false;
 				},
 				onConfirm: (confirm,{close}) => {
-					if(confirm !== `I AM SURE`){
+					if(confirm !== `I CONFIRM`){
 						this.$buefy.toast.open({
 							duration: 3000,
 							message: this.$t('Incorrect input.'),
@@ -134,7 +134,7 @@ export default {
 
 			this.$buefy.dialog.prompt({
 				title: this.$t('Format'),
-				message: this.$t("Enter 'I AM SURE' to proceed with the operation."),
+				message: this.$t("Please type 'I CONFIRM' to proceed with formatting."),
 				inputAttrs: {
 					type: "confirm"
 				},
@@ -145,7 +145,7 @@ export default {
 					this.isFormating = false;
 				},
 				onConfirm: (value) => {
-					if(value !== `I AM SURE`){
+					if(value !== `I CONFIRM`){
 						this.$buefy.toast.open({
 							duration: 3000,
 							message: this.$t('Incorrect input.'),

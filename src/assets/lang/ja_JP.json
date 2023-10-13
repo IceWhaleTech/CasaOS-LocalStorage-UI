@@ -181,7 +181,7 @@
   "Temp": "Temp",
   "WARNING!": "WARNING!",
   "This selected drive will be emptied if there is data on it. Make sure again that there is no important data on the selected drive that has not been backed up. If there is data to be migrated, the related apps will be stopped during the migration process.": "This selected drive will be emptied if there is data on it. Make sure again that there is no important data on the selected drive that has not been backed up. If there is data to be migrated, the related apps will be stopped during the migration process.",
-  "Creation in progress": "Creation in progress",
+  "Creating your local storage, a secure haven for your data...": "Creating your local storage, a secure haven for your data...",
   "Apply": "Apply",
   "Just Mount": "Just Mount",
   "Storage Name": "Storage Name",

@@ -237,7 +237,7 @@ function displayPartitionInfo(item, itemIndex){
                                       :loop="true"
                                       class="creating-animation"></lottie-animation>
 				</div>
-				<h3 class="title is-4 has-text-centered has-text-weight-light">{{ $t('Creation in progress') }}...</h3>
+				<h3 class="title is-4 has-text-centered has-text-weight-light">{{ $t('Creating your local storage, a secure haven for your data...') }}...</h3>
 			</div>
 		</section>
 		<!-- Modal-Card Footer Start-->

@@ -57,7 +57,7 @@
 				</div>
 				<p v-if="usePercent >= 80"
 				   class="has-text-right is-flex is-flex-direction-row-reverse">
-					<a href="https://wiki.casaos.io/zh/guides" target="_blank">{{ $t("Free up storage") }}</a>
+					<a href="https://wiki.casaos.io/zh/guides" target="_blank">{{ $t("Optimize Storage") }}</a>
 				</p>
 			</div>
 		</div>

@@ -64,8 +64,7 @@
 				<b-icon custom-size="casa-19px" icon="warning-solid" pack="casa"></b-icon>
 			</div>
 			{{
-				$t(`* This feature is now testing and verifying, enabling it may clear personal data and destroy the
-			installed APPs, so it is recommended to use it only during the startup.`)
+				$t(`Beta Feature: Ideal for exploration and learning. Please note, it may not ensure stability for personal data; use only with alternative data backups in place.`)
 			}}
 		</div>
 
