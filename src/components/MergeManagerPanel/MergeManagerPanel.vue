@@ -58,27 +58,6 @@
 			</div>
 		</section>
 
-		<!--		<div v-if="currentStep !== 0 && storageData.length < 2"-->
-		<!--			 class="_has-background-yellow-default _has-text-white _is-normal is-flex is-align-items-center font mb-4 pt-2 pb-2 _radius-line">-->
-		<!--			<div class="is-flex left ml-3 mr-2 is-align-items-center">-->
-		<!--				<b-icon class="is-16x16" custom-size="casa-19px" icon="warning-solid" pack="casa"></b-icon>-->
-		<!--			</div>-->
-		<!--			{{ $t('At least one extra hard drive is needed for this feature.') }}-->
-		<!--		</div>-->
-		<!--		<div v-if="currentStep !== 0 && checkBoxGroup.length > 0"-->
-		<!--			 class="_has-background-yellow-default _has-text-white _is-normal is-flex is-align-items-center font mb-4 pt-2 pb-2 _radius-line">-->
-		<!--			<div class="is-flex left ml-3 mr-2 is-align-items-center">-->
-		<!--				<b-icon class="is-16x16" custom-size="casa-19px" icon="warning-solid" pack="casa"></b-icon>-->
-		<!--			</div>-->
-		<!--			{{ $t('If the chosen storage is not empty, format better first.') }}-->
-		<!--		</div>-->
-		<!--		<div v-if="currentStep !== 0 && isSplit"-->
-		<!--			 class="_has-background-red-default _has-text-white _is-normal is-flex is-align-items-center mb-4 pt-2 pb-2 _radius-line">-->
-		<!--			<div class="is-flex left ml-3 mr-2 is-align-items-center">-->
-		<!--				<b-icon custom-size="casa-19px" icon="warning-solid" pack="casa"></b-icon>-->
-		<!--			</div>-->
-		<!--			{{ $t('Please back up your data in storage, otherwise the data may be lost.') }}-->
-		<!--		</div>-->
 		<div v-if="currentStep === 0"
 			class="_has-background-red-default _has-text-white _is-normal is-flex is-align-items-center mb-4 pt-2 pb-2 _radius-line">
 			<div class="is-flex left ml-3 mr-2 is-align-items-center">

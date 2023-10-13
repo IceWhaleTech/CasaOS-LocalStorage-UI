@@ -176,8 +176,8 @@ function displayPartitionInfo(item, itemIndex){
 <template>
 	<div>
 		<template v-if="!isCreating">
-			<header class="pl-5 pr-5 mt-4 pb-2 b-line">
-				<h3 class="title is-3 pt-1 mb-0 is-align-items-center">{{ $t('Create Storage') }}</h3>
+			<header class="pl-5 pr-5 mt-4 pb-3 b-line">
+				<h3 class="title is-5 pt-1 mb-0 is-align-items-center">{{ $t('Create Storage') }}</h3>
 				<div class="close-container">
 					<button class="delete" type="button" @click="$emit('close')"/>
 				</div>
