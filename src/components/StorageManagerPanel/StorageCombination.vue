@@ -22,9 +22,9 @@
 						<div>
 							<h4 class="mb-0 has-text-left one-line has-text-emphasis-02 is-flex is-align-items-center">
 								{{
-									displayStorageItemName(item.name)
+									displayStorageItemName(item.name, item.isSystem)
 								}}
-								<b-tag v-if="item.isSystem" class="ml-2 has-text-full-04">OS</b-tag>
+								<b-tag v-if="item.isSystem" class="ml-2 has-text-full-04">Onboard</b-tag>
 							</h4>
 
 							<p class="has-text-left has-text-full-04 has-text-grey-light mt-1">{{
@@ -155,8 +155,8 @@ export default {
 		displayStorageGroupName(name){
 			return this.isZIMA ?  "Zima HD" : "OS HD";
 		},
-		displayStorageItemName(name){
-			return name === "System" ? "Primary" : name ?? this.$t('undefined');
+		displayStorageItemName(name, isSystem = false) {
+			return isSystem ? "Primary" : name ?? this.$t('undefined');
 		},
 	},
 }
