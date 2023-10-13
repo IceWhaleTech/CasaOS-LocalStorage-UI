@@ -244,11 +244,15 @@ export default {
 
 			try {
 				// get storage list info
-				const storageRes = await this.$api.storage.list({system: "show"}).then(v => {
+				const storageRes = await this.$api.storage.list({ system: "show" }).then(v => {
 					const storage = v.data.data;
 					const systemStorage = storage.filter(item => item.disk_name === 'System')[0];
-					if(systemStorage.children){
-						const maxA = maxBy(systemStorage.children, 'size').size;
+					if (systemStorage.children) {
+						let children = systemStorage.children;
+						const maxA = maxBy(children, function (o) {
+							// WARN: Overflow will occur during conversion if left unchanged
+							return o.size/1024/1024;
+						}).size;
 						const filtered = filter(systemStorage.children, item => item.size === maxA);
 						systemStorage.children = filtered;
 					}
