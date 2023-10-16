@@ -9,7 +9,7 @@
  * Copyright (c) 2022 by IceWhale, All Rights Reserved.
 -->
 <template>
-	<div :class="{ '_max-width-320': currentStep === 1 }">
+	<div style="height: 80%">
 		<section v-if="currentStep === 0" class="notification is-overlay mb-0 pr-0 pl-0 pt-2 pb-3 non-backgroud">
 			<div v-if="currentStep === 0" class="_is-normal _has-text-gray-600 mb-4">
 				{{
