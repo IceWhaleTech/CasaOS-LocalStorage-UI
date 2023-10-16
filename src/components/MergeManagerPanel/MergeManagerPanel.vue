@@ -357,7 +357,7 @@ export default {
 			this.$messageBus("storagemanager_mergestorage");
 			try {
 				this.notEmpty = await this.$api.disks.getSize({ path: '/DATA' }).then(res => {
-					return res.data?.[0].used > 4 * 1024;
+					return res.data.data.used > 4 * 1024;
 				})
 					.finally(() => {
 						this.isConnecting = false;
@@ -697,9 +697,6 @@ export default {
 	height: 2.375rem;
 }
 
-._max-width-320 {
-	max-width: 20rem;
-}
 </style>
 <style lang="scss">
 .pri-mtr-3px .control-label {

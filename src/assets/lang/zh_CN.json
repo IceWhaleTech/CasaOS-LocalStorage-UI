@@ -63,6 +63,6 @@
   "The disk will be formatted as a single partition, all data will be erased.": "磁盘将作为单个分区格式化，所有数据都将被删除。",
   "Storage space creation failed. Please try formatting and creating again.": "存储空间创建失败。请尝试格式化并重新创建。",
   "Storage space creation failed. Please try manually formatting before trying again.": "存储空间创建失败。请尝试格式化并重新创建。",
-  "Please type 'I CONFIRM' to proceed with disk removal.": "请输入“我确认”以继续删除磁盘。",
-  "Please type 'I CONFIRM' to proceed with formatting.": "请输入“我确认”以继续格式化。"
+  "Please type 'I CONFIRM' to proceed with disk removal.": "请输入“I CONFIRM”以继续删除磁盘。",
+  "Please type 'I CONFIRM' to proceed with formatting.": "请输入“I CONFIRM”以继续格式化。"
 }
