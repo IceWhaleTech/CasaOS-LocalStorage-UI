@@ -35,7 +35,7 @@
 					</div>
 					<b-tabs v-model="activeTab" animateInitially animated class="region-box">
 						<b-tab-item :disabled="!isShowMergeTab" :label="$t('Merge')"
-									class="scrollbars-light-auto tab-item">
+									class="scrollbars-light-auto tab-item max-height">
 							<MergeStorages @update="()=> {getDiskList(); activeTab = 1;}"></MergeStorages>
 						</b-tab-item>
 						<b-tab-item :label="$t('Storage')" class="scrollbars-light-auto tab-item max-height">
