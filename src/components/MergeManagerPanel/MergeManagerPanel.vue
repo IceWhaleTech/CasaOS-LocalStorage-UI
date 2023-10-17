@@ -32,8 +32,8 @@
 						{{
 							renderSize(item.size - item.availSize)
 						}}/{{
-							renderSize(item.size)
-						}}
+	renderSize(item.size)
+}}
 					</span>
 				</div>
 				<b-checkbox v-model="checkBoxGroup" :disabled="item.persistedIn !== 'casaos' || item.isSystem"
@@ -64,7 +64,8 @@
 				<b-icon custom-size="casa-19px" icon="warning-solid" pack="casa"></b-icon>
 			</div>
 			{{
-				$t(`Beta Feature: Ideal for exploration and learning. Please note, it may not ensure stability for personal data; use only with alternative data backups in place.`)
+				$t(`Beta Feature: Ideal for exploration and learning. Please note, it may not ensure stability for personal
+			data; use only with alternative data backups in place.`)
 			}}
 		</div>
 
@@ -490,7 +491,7 @@ export default {
 			});
 		},
 
-		async updateMergerfsInfo(){
+		async updateMergerfsInfo() {
 			let mergeStorageList;
 			try {
 				mergeStorageList = await this.$api.local_storage
@@ -502,10 +503,10 @@ export default {
 				console.log(e);
 				mergeStorageList = [];
 			}
-			this.mergeStorageList.push(...mergeStorageList);
+			this.mergeStorageList = mergeStorageList;
 			this.checkBoxGroup.push(...mergeStorageList);
 			await this.getDiskList();
-			this.tempCheckBox = [...this.checkBoxGroup, ...this.checkBoxMissGroup];
+			this.tempCheckBox = [...this.mergeStorageList, ...this.checkBoxMissGroup];
 		}
 	},
 };
@@ -696,7 +697,6 @@ export default {
 	width: 2.375rem;
 	height: 2.375rem;
 }
-
 </style>
 <style lang="scss">
 .pri-mtr-3px .control-label {
