@@ -81,7 +81,7 @@
 				<div class="font">
 					{{ $t(`Enter 'I AM SURE' to proceed with the operation.`) }}
 				</div>
-				<b-input ref="inputPassword" v-model="inputConfirm" class="mt-4" password-reveal
+				<b-input ref="inputPassword" v-model="inputConfirm" class="mt-4"
 					@keyup.enter.native="verifyOperate(inputConfirm)"></b-input>
 			</template>
 			<div v-if="currentStep === 3" class="is-flex is-align-items-center font">

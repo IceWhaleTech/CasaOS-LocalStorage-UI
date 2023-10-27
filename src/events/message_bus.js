@@ -19,11 +19,11 @@ async function intermediateProcessor(name, ownParameter) {
 		let VXstate = await import('../store').then((module) => module.default);
 		//RECORD: the value shouldn't be changed.
 		//UPDATE: from window.$wujie
-		VXstate.commit('SET_ACCESS_TOKEN', window.$wujie.props?.access_token ?? "");
-		VXstate.commit('SET_REFRESH_TOKEN', window.$wujie.props?.refresh_token ?? "");
-		VXstate.commit('SET_DEVICE_ID', window.$wujie.props?.device_id ?? "");
-		VXstate.commit('SET_ACCESS_ID', window.$wujie.props?.access_id ?? "");
-		VXstate.commit('SET_LANGUAGE', window.$wujie.props?.casaos_lang ?? "");
+		VXstate.commit('SET_ACCESS_TOKEN', window.$wujie?.props?.access_token ?? "");
+		VXstate.commit('SET_REFRESH_TOKEN', window.$wujie?.props?.refresh_token ?? "");
+		VXstate.commit('SET_DEVICE_ID', window.$wujie?.props?.device_id ?? "");
+		VXstate.commit('SET_ACCESS_ID', window.$wujie?.props?.access_id ?? "");
+		VXstate.commit('SET_LANGUAGE', window.$wujie?.props?.casaos_lang ?? "");
 		store = VXstate.state;
 	}
 	let publicParameter = {
