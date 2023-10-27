@@ -111,15 +111,15 @@
 					class="_has-background-gray-100" expaned rounded @click="currentStep = 0" />
 			</div>
 			<div>
-				<b-button v-show="currentStep === 0" :disabled="disableMergeButton" :label="$t(affirm)"
-					:loading="isConnecting" expaned rounded type="is-primary" @click="test" />
-				<b-button v-show="currentStep === 1" :label="$t(affirm)" :loading="isConnecting"
+				<b-button v-show="currentStep === 0" :disabled="disableMergeButton" :label="$t(affirm)" :loading="isLoading"
+					expaned rounded type="is-primary" @click="test" />
+				<b-button v-show="currentStep === 1" :label="$t(affirm)" :loading="isLoading"
 					class="_has-background-red-default is-rounded _has-text-white" expaned @click="currentStep = 2" />
-				<b-button v-show="currentStep === 2" :label="$t(affirm)" :loading="isConnecting" expaned rounded
+				<b-button v-show="currentStep === 2" :label="$t(affirm)" :loading="isLoading" expaned rounded
 					type="is-primary" @click="verifyOperate(inputConfirm)" />
-				<b-button v-show="currentStep === 3" :label="$t(affirm)" :loading="isConnecting" expaned rounded
+				<b-button v-show="currentStep === 3" :label="$t(affirm)" :loading="isLoading" expaned rounded
 					type="is-primary" @click="restart" />
-				<b-button v-show="currentStep === 4" :label="$t(affirm)" :loading="isConnecting" expaned rounded
+				<b-button v-show="currentStep === 4" :label="$t(affirm)" :loading="isLoading" expaned rounded
 					type="is-primary" @click="restart" />
 			</div>
 		</footer>
@@ -142,7 +142,7 @@ export default {
 		cToolTip,
 	},
 	async created() {
-		await this.updateMergerfsInfo();
+		await this.resetMergerfsInfo();
 	},
 	watch: {
 		// 0 default :mainstorage settings
@@ -190,98 +190,37 @@ export default {
 	},
 	data() {
 		return {
+			// Exting Storage list.
 			storageData: [],
+			// Logic data. mergeStorageList - storageData = storageMissData
 			storageMissData: [],
+			// Exting disk list.
 			diskData: {},
-			unDiskData: {},
+			// unDiskData: {},
+
+			// User currently selects Storage list.
 			checkBoxGroup: [],
 			checkBoxMissGroup: [],
-			isConnecting: false,
+			// button status.
+			isLoading: false,
+			// bussiness service flow controller.
 			currentStep: 0,
 			title: "Merge Storages",
 			affirm: "Submit",
-			mergeInfo: [],
+			// mergeInfo: [],
+			// Comfirm parrameter.
 			inputConfirm: "",
+			// APPs running name.
 			runName: "",
-			notEmpty: false,
+			// TODO: Change Storage Status to the description on the business side. Eg: StorageInUse
+			// Whether the storage is empty.
+			emptyStorage: false,
+			// Merge Storage list
 			mergeStorageList: [],
 			tempCheckBox: [],
 		};
 	},
 	methods: {
-		/**
-		 * @description: Get disk list
-		 * src/components/Storage/StorageManagerPanel.vue:234
-		 */
-		async getDiskList() {
-			// get storage list
-			// TODO: the part is repetition
-			//  with APPs Installation Location requirement document
-			// const storageRes = await this.$api.storage.list({system: "show"})
-			const storageRes = await this.$api.storage.list();
-			const storageArray = [];
-			const storageMissArray = [];
-			let testMergeMiss = this.mergeStorageList;
-			storageRes.data.data.forEach((item) => {
-				item.children.forEach((part) => {
-					part.disk = item.path;
-					part.diskName = item.disk_name;
-					storageArray.push(part);
-					testMergeMiss = testMergeMiss.filter((v) => v !== part.uuid);
-				});
-			});
-			this.checkBoxMissGroup.push(...testMergeMiss);
-			testMergeMiss.forEach((item) => {
-				storageMissArray.push({
-					uuid: "",
-					mount_point: "",
-					size: "",
-					avail: "",
-					type: "",
-					path: item,
-					drive_name: "",
-					label: "",
-					persisted_in: "",
-					disk: "",
-					diskName: "",
-				});
-			});
-
-			this.storageData = storageArray.map((storage) => {
-				return {
-					uuid: storage.uuid,
-					name: storage.label,
-					isSystem: storage.diskName === "System",
-					fsType: storage.type,
-					size: storage.size,
-					availSize: storage.avail,
-					usePercent: 100 - Math.floor((storage.avail * 100) / storage.size),
-					diskName: storage.drive_name,
-					path: storage.path,
-					mount_point: storage.mount_point,
-					disk: storage.disk,
-					persistedIn: storage.persisted_in,
-				};
-			});
-
-			this.storageMissData = storageMissArray.map((storage) => {
-				return {
-					uuid: storage.uuid,
-					name: storage.label,
-					isSystem: storage.diskName === "System",
-					fsType: storage.type,
-					size: storage.size,
-					availSize: storage.avail,
-					usePercent: 100 - Math.floor((storage.avail * 100) / storage.size),
-					diskName: storage.drive_name,
-					path: storage.path,
-					mount_point: storage.mount_point,
-					disk: storage.disk,
-					persistedIn: storage.persisted_in,
-				};
-			});
-		},
-
 		/**
 		 * @description: update merge info
 		 * sync function
@@ -321,7 +260,7 @@ export default {
 								indefinite: false,
 							});
 							this.$emit("update", true);
-							this.updateMergerfsInfo();
+							this.resetMergerfsInfo();
 							this.$EventBus.$emit(events.RELOAD_APP_LIST);
 						})
 						.catch((e) => {
@@ -339,7 +278,7 @@ export default {
 								case 200:
 								case 400:
 								default:
-									this.isConnecting = false;
+									this.isLoading = false;
 									// refresh local storage
 									this.$EventBus.$emit(events.RELOAD_MOUNT_LIST);
 									// close the modal
@@ -353,15 +292,15 @@ export default {
 			this.$emit("close");
 		},
 		async test() {
-			this.isConnecting = true;
+			this.isLoading = true;
 			// submit
 			this.$messageBus("storagemanager_mergestorage");
 			try {
-				this.notEmpty = await this.$api.disks.getSize({ path: '/DATA' }).then(res => {
+				this.emptyStorage = await this.$api.disks.getSize({ path: '/DATA' }).then(res => {
 					return res.data.data.used > 4 * 1024;
 				})
 					.finally(() => {
-						this.isConnecting = false;
+						this.isLoading = false;
 					});
 			} catch (e) {
 				this.$buefy.toast.open({
@@ -374,7 +313,7 @@ export default {
 				return e;
 			}
 			// business :: If storage is empty, no reminder
-			if (this.notEmpty) {
+			if (this.emptyStorage) {
 				this.title = "Reset Warning";
 				this.affirm = "Reset";
 				this.currentStep = 1;
@@ -382,7 +321,7 @@ export default {
 				this.submit();
 			}
 		},
-		//
+
 		async submit(e, nextStep = false) {
 			// operation : split the mergerfs
 			let notSplit = this.mergeStorageList.every(
@@ -396,7 +335,7 @@ export default {
 					.getAppGrid()
 					.then((res) => res.data.data || []);
 				dockerInfo = filter(dockerInfo, { status: "running" });
-				if (this.notEmpty) {
+				if (this.emptyStorage) {
 					this.restart();
 					return;
 				} else if (dockerInfo.length === 1) {
@@ -418,7 +357,7 @@ export default {
 		},
 
 		async restart() {
-			this.isConnecting = true;
+			this.isLoading = true;
 			try {
 				//business :: all apps to restarted.
 				// 1、 获取应用信息，主要是运行中的应用. 2、关闭应用 3、合并磁盘 4、启动应用
@@ -446,7 +385,7 @@ export default {
 										this.updateMerge(dockerInfo);
 									})
 									.catch((e) => {
-										this.isConnecting = false;
+										this.isLoading = false;
 										this.$buefy.toast.open({
 											message: e.response.data.data || e.response.data.message,
 											type: "is-danger",
@@ -461,7 +400,7 @@ export default {
 						});
 					})
 					.catch((e) => {
-						this.isConnecting = false;
+						this.isLoading = false;
 						this.$buefy.toast.open({
 							duration: 5000,
 							message: e.response.data.data || e.response.data.message,
@@ -491,23 +430,116 @@ export default {
 			});
 		},
 
-		async updateMergerfsInfo() {
-			let mergeStorageList;
+		async resetMergerfsInfo() {
 			try {
-				mergeStorageList = await this.$api.local_storage
+				this.mergeStorageList = await this.$api.local_storage
 					.getMergerfsInfo()
 					.then((res) => {
 						return res.data.data[0]["source_volume_uuids"];
 					});
 			} catch (e) {
 				console.log(e);
-				mergeStorageList = [];
+				this.mergeStorageList = [];
 			}
-			this.mergeStorageList = mergeStorageList;
-			this.checkBoxGroup.push(...mergeStorageList);
-			await this.getDiskList();
+			// Reset the checkbox.
+			this.checkBoxGroup.splice(0, this.checkBoxGroup.length, ...this.mergeStorageList);
+			await this.getStorageList();
 			this.tempCheckBox = [...this.mergeStorageList, ...this.checkBoxMissGroup];
-		}
+		},
+
+		async getStorageList() {
+			// const storageRes = await this.$api.storage.list({system: "show"}) // get all Storage list.
+			const storageRes = await this.$api.storage.list().then(res => res?.data?.data || []);
+			const storageArray = [];
+			const storageMissArray = [];
+			let testMergeMiss = this.mergeStorageList;
+			storageRes.forEach((item) => {
+				item.children.forEach((part) => {
+					part.disk = item.path;
+					part.diskName = item.disk_name;
+					storageArray.push(part);
+					testMergeMiss = testMergeMiss.filter((v) => v !== part.uuid);
+				});
+			});
+			// Reset the Missing Storage checkbox.
+			this.checkBoxMissGroup.splice(0, this.checkBoxMissGroup.length, ...testMergeMiss);
+			// this.checkBoxMissGroup = [...this.checkBoxMissGroup, ...testMergeMiss];
+			testMergeMiss.forEach((item) => {
+				storageMissArray.push({
+					uuid: "",
+					mount_point: "",
+					size: "",
+					avail: "",
+					type: "",
+					path: item,
+					drive_name: "",
+					label: "",
+					persisted_in: "",
+					disk: "",
+					diskName: "",
+				});
+			});
+
+			this.storageData = storageArray.map((storage) => {
+				// return {
+				// 	uuid: storage.uuid,
+				// 	name: storage.label,
+				// 	isSystem: storage.diskName === "System",
+				// 	fsType: storage.type,
+				// 	size: storage.size,
+				// 	availSize: storage.avail,
+				// 	usePercent: 100 - Math.floor((storage.avail * 100) / storage.size),
+				// 	diskName: storage.drive_name,
+				// 	path: storage.path,
+				// 	mount_point: storage.mount_point,
+				// 	disk: storage.disk,
+				// 	persistedIn: storage.persisted_in,
+				// };
+
+				return this.formatteStorageItemData(storage);
+			});
+
+			// this.storageMissData = storageMissArray.map((storage) => {
+			// 	// return {
+			// 	// 	uuid: storage.uuid,
+			// 	// 	name: storage.label,
+			// 	// 	isSystem: storage.diskName === "System",
+			// 	// 	fsType: storage.type,
+			// 	// 	size: storage.size,
+			// 	// 	availSize: storage.avail,
+			// 	// 	usePercent: 100 - Math.floor((storage.avail * 100) / storage.size),
+			// 	// 	diskName: storage.drive_name,
+			// 	// 	path: storage.path,
+			// 	// 	mount_point: storage.mount_point,
+			// 	// 	disk: storage.disk,
+			// 	// 	persistedIn: storage.persisted_in,
+			// 	// };
+
+			// 	return this.formatteStorageItemData(storage);
+			// });
+
+			this.storageMissData = testMergeMiss.map((item) => {
+				return this.formatteStorageItemData({ path: item });
+			});
+		},
+
+		// public function
+		formatteStorageItemData(item) {
+			return {
+				uuid: item?.uuid,
+				name: item?.label,
+				isSystem: item?.diskName === "System",
+				fsType: item?.type,
+				size: item?.size,
+				availSize: item?.avail,
+				usePercent: 100 - Math.floor((item?.avail * 100) / item?.size),
+				diskName: item?.drive_name,
+				path: item?.path,
+				mount_point: item?.mount_point,
+				disk: item?.disk,
+				persistedIn: item?.persisted_in,
+			};
+		},
 	},
 };
 </script>
