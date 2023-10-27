@@ -1,7 +1,0 @@
-{
-    "i18n-ally.localesPaths": [
-        "src/assets/lang"
-    ],
-    "i18n-ally.keystyle": "nested",
-    "svg.preview.background": "black"
-}
