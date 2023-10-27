@@ -1,0 +1,18 @@
+{
+    "name": "icewhale_localstorage",
+    "title": {
+        "en_us": "Connect"
+    },
+    "prefetch": true,
+    "entry": "/modules/icewhale_localstorage/index.html",
+    "icon": "/modules/icewhale_localstorage/favicon.svg",
+    "description": "Icewhale LocalStorage: To manage your local storage",
+    "formality": {
+        "type": "modal",
+        "props": {
+            "width": "640px",
+            "hasModalCard": true,
+            "animation": "zoom-in"
+        }
+    }
+}
