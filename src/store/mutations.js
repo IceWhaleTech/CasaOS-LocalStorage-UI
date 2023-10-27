@@ -18,6 +18,14 @@ const mutations = {
 		state.refresh_token = token
 	},
 
+	SET_DEVICE_ID(state, id) {
+		state.device_id = id
+	},
+
+	SET_ACCESS_ID(state, id) {
+		state.access_id = id
+	},
+
 	SET_OPERATE_OBJECT(state, val) {
 		state.operateObject = val
 	},
