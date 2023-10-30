@@ -112,8 +112,8 @@
 			</div>
 			<div>
 				<b-button v-show="currentStep !== 1" :disabled="disableMergeButton" :label="$t(affirm)"
-						:loading="isConnecting" expaned rounded type="is-primary" @click="submitProxy" />
-				<b-button v-show="currentStep === 1" :label="$t(affirm)" :loading="isConnecting"
+						:loading="isLoading" expaned rounded type="is-primary" @click="submitProxy" />
+				<b-button v-show="currentStep === 1" :label="$t(affirm)" :loading="isLoading"
 					class="_has-background-red-default is-rounded _has-text-white" expaned rounded @click="currentStep = 2" />
 			</div>
 		</footer>
