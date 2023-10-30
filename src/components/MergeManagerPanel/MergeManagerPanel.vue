@@ -111,16 +111,10 @@
 					class="_has-background-gray-100" expaned rounded @click="currentStep = 0" />
 			</div>
 			<div>
-				<b-button v-show="currentStep === 0" :disabled="disableMergeButton" :label="$t(affirm)"
-					:loading="isConnecting" expaned rounded type="is-primary" @click="test" />
+				<b-button v-show="currentStep !== 1" :disabled="disableMergeButton" :label="$t(affirm)"
+						:loading="isConnecting" expaned rounded type="is-primary" @click="submitProxy" />
 				<b-button v-show="currentStep === 1" :label="$t(affirm)" :loading="isConnecting"
-					class="_has-background-red-default is-rounded _has-text-white" expaned @click="currentStep = 2" />
-				<b-button v-show="currentStep === 2" :label="$t(affirm)" :loading="isConnecting" expaned rounded
-					type="is-primary" @click="verifyOperate(inputConfirm)" />
-				<b-button v-show="currentStep === 3" :label="$t(affirm)" :loading="isConnecting" expaned rounded
-					type="is-primary" @click="restart" />
-				<b-button v-show="currentStep === 4" :label="$t(affirm)" :loading="isConnecting" expaned rounded
-					type="is-primary" @click="restart" />
+					class="_has-background-red-default is-rounded _has-text-white" expaned rounded @click="currentStep = 2" />
 			</div>
 		</footer>
 	</div>
@@ -507,7 +501,16 @@ export default {
 			this.checkBoxGroup.push(...mergeStorageList);
 			await this.getDiskList();
 			this.tempCheckBox = [...this.mergeStorageList, ...this.checkBoxMissGroup];
-		}
+		},
+
+		submitProxy() {
+			if (this.currentStep === 0)
+				this.test();
+			if (this.currentStep === 2)
+				this.verifyOperate(this.inputConfirm);
+			if (this.currentStep === 3 || this.currentStep === 4)
+				this.restart();
+		},
 	},
 };
 </script>

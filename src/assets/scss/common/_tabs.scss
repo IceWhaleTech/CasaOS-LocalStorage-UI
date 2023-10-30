@@ -3,27 +3,40 @@
 .tabs {
 	ul {
 		border-bottom: 1px solid transparent;
-		
+
 		li {
-			font-size: 1rem;
-			
-			&:first-child {
+			font-size: 0.875rem;
+
+			// &:first-child {
+			// a {
+			// 	margin-left: 0;
+			// }
+			// }
+
+			a {
+				// color: $primary;
+				color: hsla(208, 14%, 58%, 1);
+				// border-bottom: transparent 2px solid !important;
+				border-bottom: none;
+				padding: 0.25rem 0;
+				margin: 0 0.75rem;
+			}
+
+			&.is-active {
+				background-color: hsla(0, 0%, 100%, 1);
+				border-radius: 4px;
+				height: 1.75rem;
+
 				a {
-					margin-left: 0;
+					color: hsla(208, 3%, 19%, 1);
+					// border-bottom: $primary 2px solid !important;
+					border-bottom: none;
 				}
 			}
-			
-			a {
-				color: $primary;
-				border-bottom: transparent 2px solid !important;
-				padding: 0.5rem 0 0.1rem 0;
-				margin: 0 0.5rem;
-			}
-			
-			&.is-active {
+
+			&.is-disabled {
 				a {
-					font-weight: 700;
-					border-bottom: $primary 2px solid !important;
+					color: hsla(208, 11%, 78%, 1);
 				}
 			}
 		}
