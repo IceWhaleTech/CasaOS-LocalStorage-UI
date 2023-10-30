@@ -11,7 +11,7 @@
 <template>
 	<div style="height: 80%">
 		<section v-if="currentStep === 0" class="notification is-overlay mb-0 pr-0 pl-0 pt-2 pb-3 non-backgroud">
-			<div v-if="currentStep === 0" class="_is-normal _has-text-gray-600 mb-4">
+			<div class="_is-normal _has-text-gray-600 mb-4">
 				{{
 					$t("All the checked Storage will be merged into {CasaOS} HD.", {
 						CasaOS: OS,
@@ -145,7 +145,7 @@ export default {
 		await this.updateMergerfsInfo();
 	},
 	watch: {
-		// 0 default :mainstorage settings
+		// 0 default show:megerStorage Settings view.
 		// 1 test whether the storage is empty :: 1 is empty
 		// 2 Data Protected :: input password  :: 2 is not empty
 		// 3 APPs Restart
