@@ -513,24 +513,6 @@ export default {
 
 		text-align: center;
 		font-feature-settings: 'pnum' on, 'lnum' on;
-
-		&.is-active {
-			background-color: hsla(0, 0%, 100%, 1);
-			border-radius: 4px;
-			height: 1.75rem;
-
-			a {
-				border-bottom: none !important;
-				color: hsla(208, 20%, 20%, 1);
-			}
-		}
-
-		a {
-			margin: 0 0.75rem !important;
-			padding: 0.25rem 0;
-			color: hsla(208, 14%, 58%, 1);
-			border-bottom: none !important;
-		}
 	}
 }
 .max-height{

@@ -11,7 +11,7 @@
 <template>
 	<div style="height: 80%">
 		<section v-if="currentStep === 0" class="notification is-overlay mb-0 pr-0 pl-0 pt-2 pb-3 non-backgroud">
-			<div v-if="currentStep === 0" class="_is-normal _has-text-gray-600 mb-4">
+			<div class="_is-normal _has-text-gray-600 mb-4">
 				{{
 					$t("All the checked Storage will be merged into {CasaOS} HD.", {
 						CasaOS: OS,
@@ -111,16 +111,10 @@
 					class="_has-background-gray-100" expaned rounded @click="currentStep = 0" />
 			</div>
 			<div>
-				<b-button v-show="currentStep === 0" :disabled="disableMergeButton" :label="$t(affirm)" :loading="isLoading"
-					expaned rounded type="is-primary" @click="test" />
+				<b-button v-show="currentStep !== 1" :disabled="disableMergeButton" :label="$t(affirm)"
+						:loading="isLoading" expaned rounded type="is-primary" @click="submitProxy" />
 				<b-button v-show="currentStep === 1" :label="$t(affirm)" :loading="isLoading"
-					class="_has-background-red-default is-rounded _has-text-white" expaned @click="currentStep = 2" />
-				<b-button v-show="currentStep === 2" :label="$t(affirm)" :loading="isLoading" expaned rounded
-					type="is-primary" @click="verifyOperate(inputConfirm)" />
-				<b-button v-show="currentStep === 3" :label="$t(affirm)" :loading="isLoading" expaned rounded
-					type="is-primary" @click="restart" />
-				<b-button v-show="currentStep === 4" :label="$t(affirm)" :loading="isLoading" expaned rounded
-					type="is-primary" @click="restart" />
+					class="_has-background-red-default is-rounded _has-text-white" expaned rounded @click="currentStep = 2" />
 			</div>
 		</footer>
 	</div>
@@ -145,7 +139,7 @@ export default {
 		await this.resetMergerfsInfo();
 	},
 	watch: {
-		// 0 default :mainstorage settings
+		// 0 default show:megerStorage Settings view.
 		// 1 test whether the storage is empty :: 1 is empty
 		// 2 Data Protected :: input password  :: 2 is not empty
 		// 3 APPs Restart
@@ -445,6 +439,15 @@ export default {
 			this.checkBoxGroup.splice(0, this.checkBoxGroup.length, ...this.mergeStorageList);
 			await this.getStorageList();
 			this.tempCheckBox = [...this.mergeStorageList, ...this.checkBoxMissGroup];
+		},
+
+		submitProxy() {
+			if (this.currentStep === 0)
+				this.test();
+			if (this.currentStep === 2)
+				this.verifyOperate(this.inputConfirm);
+			if (this.currentStep === 3 || this.currentStep === 4)
+				this.restart();
 		},
 
 		async getStorageList() {

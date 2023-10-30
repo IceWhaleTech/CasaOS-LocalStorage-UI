@@ -82,6 +82,11 @@ module.exports = {
 		hot: true,
 		// contentBase: publicPath,
 		proxy: {
+			// '/socket.io': {
+			// 	target: `ws://${process.env.VUE_APP_DEV_IP}:${process.env.VUE_APP_DEV_PORT}/socket.io`,
+			// 	changeOrigin: true,
+			// 	ws: true,
+			// },
 			'/': {
 				target: `http://${process.env.VUE_APP_DEV_IP}:${process.env.VUE_APP_DEV_PORT}`,
 				changeOrigin: true,
