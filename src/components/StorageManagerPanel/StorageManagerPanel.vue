@@ -7,7 +7,7 @@
   * Copyright (c) 2022 by IceWhale, All Rights Reserved.
   -->
 <template>
-	<div class="modal-card _min-h-260px">
+	<div class="modal-card _min-h-393px">
 		<!-- Modal-Card Body Start -->
 		<template v-if="!CreatingStoragePanelIsShow">
 			<header class="pl-5 pr-5 mt-4 pb-3 b-line">
@@ -472,8 +472,8 @@ export default {
 	border-radius: 0.5rem;
 }
 
-._min-h-260px{
-	min-height: 260px;
+._min-h-393px{
+	min-height: 393px;
 }
 </style>
 
