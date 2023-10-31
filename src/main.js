@@ -69,7 +69,7 @@ import VueSocialSharing from 'vue-social-sharing'
 import VueSocketIOExt   from 'vue-socket.io-extended';
 import messageBus       from '@/events/index.js'
 
-import '@/assets/scss/app.scss'
+// import '@/assets/scss/app.scss'
 import VAnimateCss      from 'v-animate-css';
 
 const io = require("socket.io-client");
