@@ -16,7 +16,10 @@ async function intermediateProcessor(name, ownParameter) {
 		"casaos_lang": "123456789",
 	}
 	if (typeof window !== 'undefined') {
-		let VXstate = await import('../store').then((module) => module.default);
+		let VXstate = await import('../store').then((module) => {
+			debugger
+			return module.default
+		});
 		//RECORD: the value shouldn't be changed.
 		//UPDATE: from window.$wujie
 		VXstate.commit('SET_ACCESS_TOKEN', window.$wujie?.props?.access_token ?? "");
@@ -42,7 +45,8 @@ async function intermediateProcessor(name, ownParameter) {
 	}
 }
 
-module.exports = {
+// module.exports = event
+let event = {
 	storagemanager_storage: async () => {
 		return await intermediateProcessor("casaos-ui:widget:storagemanager_storage")
 	},
@@ -56,13 +60,15 @@ module.exports = {
 		return await intermediateProcessor("casaos-ui:widget:storagemanager_drive")
 	},
 	apps_open: async (name) => {
-		return await intermediateProcessor("casaos-ui:app:apps_open", {value: name})
+		return await intermediateProcessor("casaos-ui:app:apps_open", { value: name })
 	},
 	apps_close: async (name) => {
-		return await intermediateProcessor("casaos-ui:app:apps_close", {value: name})
+		return await intermediateProcessor("casaos-ui:app:apps_close", { value: name })
 	},
 	mircoapp_communicate: async (params) => {
 		const payload = typeof params === 'string' ? { value: params } : params;
 		return await intermediateProcessor("casaos-ui:app:mircoapp_communicate", payload);
 	},
 }
+
+export default event

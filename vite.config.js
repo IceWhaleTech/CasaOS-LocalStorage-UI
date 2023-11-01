@@ -3,6 +3,8 @@ import { defineConfig } from 'vite'
 // import vue from '@vitejs/plugin-vue'
 // Adaptive to vue2. 
 import vue from '@vitejs/plugin-vue2'
+import requireTransform from 'vite-plugin-require-transform'
+// import vitePluginSocketIO from 'vite-plugin-socket.io'
 
 
 import path from 'path'
@@ -28,5 +30,5 @@ export default defineConfig({
         ],
         extensions: ['.js', '.vue', '.json', '.mjs', '.ts', '.tsx']
     },
-    plugins: [vue()],
+    plugins: [requireTransform({ flieRegex: /.js$|.vue$/ }), vue()],
 })

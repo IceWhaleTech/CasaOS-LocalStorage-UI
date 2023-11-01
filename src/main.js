@@ -72,7 +72,9 @@ import messageBus       from '@/events/index.js'
 // import '@/assets/scss/app.scss'
 import VAnimateCss      from 'v-animate-css';
 
-const io = require("socket.io-client");
+// const io = require("socket.io-client");
+import { io } from 'socket.io-client'
+const process = import.meta
 
 const isDev = process.env.NODE_ENV === 'dev';
 const protocol = document.location.protocol
