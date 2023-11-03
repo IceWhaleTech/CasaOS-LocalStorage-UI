@@ -1,3 +1,4 @@
+.env.*.local
 ### VisualStudioCode template
 .vscode/
 .idea/
