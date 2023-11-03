@@ -10,41 +10,40 @@
 	<div class="modal-card _min-h-393px">
 		<!-- Modal-Card Body Start -->
 		<template v-if="!CreatingStoragePanelIsShow">
-			<header class="pl-5 pr-5 mt-4 pb-3 b-line">
+			<header class="is-flex-grow-0 is-flex-shrink-0 pl-5 pr-5 mt-4 pb-3 b-line">
 				<h3 class="title is-5 pt-1 mb-0 is-align-items-center">{{ $t('Storage Manager') }}</h3>
 				<div class="close-container">
-					<button class="delete" type="button" @click="close"/>
+					<button class="delete" type="button" @click="close" />
 				</div>
 			</header>
-			<section :class="{ 'b-line': storageData.length > 0 && activeTab === 0}" class="pr-5 pl-5 mt-4 pb-2">
+			<section :class="{ 'b-line': storageData.length > 0 && activeTab === 0 }"
+				class="is-flex is-flex-grow-1 is-flex-shrink-0 pr-5 pl-5 mt-4 pb-2">
 				<!-- Storage and Disk List Start -->
 				<div class="is-flex-grow-1 is-relative">
 					<div v-if="activeTab === 1" class="create-container">
 						<popper :options="{ placement: 'bottom', modifiers: { offset: { offset: '0,4px' } } }"
-								append-to-body
-								trigger="hover">
+							append-to-body trigger="hover">
 							<div v-show="unDiskData.length === 0" class="popper  tooltip-content dark">
 								{{ $t('Please insert a Drive to Create Storage') }}
 							</div>
 							<div slot="reference">
 								<b-button :disabled="unDiskData.length === 0" :type="state_createstorage_operability"
-										  rounded @click="showCreate">{{ $t('Create Storage') }}
+									rounded @click="showCreate">{{ $t('Create Storage') }}
 								</b-button>
 							</div>
 						</popper>
 					</div>
 					<b-tabs v-model="activeTab" animateInitially animated class="region-box">
 						<b-tab-item :disabled="!isShowMergeTab" :label="$t('Merge')"
-									class="scrollbars-light-auto tab-item max-height">
-							<MergeStorages @update="()=> {getDiskList(); activeTab = 1;}"></MergeStorages>
+							class="scrollbars-light-auto tab-item max-height">
+							<MergeStorages @update="() => { getDiskList(); activeTab = 1; }"></MergeStorages>
 						</b-tab-item>
 						<b-tab-item :label="$t('Storage')" class="scrollbars-light-auto tab-item max-height">
 							<storage-combination :storageData="mergeCombinationsStorageData"
-												 :type="state_mainstorage_operability"
-												 @reload="getDiskList"></storage-combination>
+								:type="state_mainstorage_operability" @reload="getDiskList"></storage-combination>
 							<template v-if="storageData.length">
 								<storage-item v-for="(item, index) in storageData" :key="'storage' + index" :item="item"
-											  @getDiskList="getDiskList"></storage-item>
+									@getDiskList="getDiskList"></storage-item>
 							</template>
 							<div v-if="showTipsMergeDisks" class="_background-tips" style="position: relative">
 								<div class="is-flex is-align-items-center is-justify-content-center is-flex-grow-1">
@@ -54,26 +53,24 @@
 									</div>
 									<b-image :src="require('@/assets/img/learn/tips-mergeStorage.svg')"></b-image>
 								</div>
-								<b-icon class="cursor-pointer" icon="close-outline" pack="casa"
-										size="is-small"
-										style="position: absolute;top: 0.25rem;right: 0.25rem;"
-										@click=""></b-icon>
+								<b-icon class="cursor-pointer" icon="close-outline" pack="casa" size="is-small"
+									style="position: absolute;top: 0.25rem;right: 0.25rem;" @click=""></b-icon>
 							</div>
 						</b-tab-item>
 						<b-tab-item :label="$t('Drive')" class="scrollbars-light-auto tab-item max-height">
-							<drive-item v-for="(item, index) in diskData" :key="'disk' + index"
-										:item="item"></drive-item>
+							<drive-item v-for="(item, index) in diskData" :key="'disk' + index" :item="item"></drive-item>
 							<div v-if="diskData.length === 1"
-								 class="is-flex is-align-items-center is-justify-content-center _background-tips mb-5 p-4">
+								class="is-flex is-align-items-center is-justify-content-center _background-tips mb-5 p-4">
 								<div class="_236x88">
 									<p class="has-text-title-06">{{ $t("Tips") }}:</p>
 									<p class="has-text-full-03 ">
 										{{
-											$t("The device has six 3.5-inch HDD bays and four M.2 hard drive bays, Insert more disks.")
+											$t("The device has six 3.5-inch HDD bays and four M.2 hard drive bays, Insert more
+																				disks.")
 										}}</p>
 								</div>
 								<b-image :src="require('@/assets/img/learn/tips-insertMoreDrives.svg')"
-										 class="_320x100"></b-image>
+									class="_320x100"></b-image>
 							</div>
 						</b-tab-item>
 					</b-tabs>
@@ -85,11 +82,9 @@
 			</section>
 		</template>
 
-		<CreatingStoragePanel v-else :createStorageNameDefault="createStorageNameDefault"
-							  :storageData="storageData" :unDiskData="unDiskData"
-							  @close:CreatingStoragePanel="CreatingStoragePanelIsShow = false"
-							  @close="close"
-							  @refresh:DiskList="getDiskList"></CreatingStoragePanel>
+		<CreatingStoragePanel v-else :createStorageNameDefault="createStorageNameDefault" :storageData="storageData"
+			:unDiskData="unDiskData" @close:CreatingStoragePanel="CreatingStoragePanelIsShow = false" @close="close"
+			@refresh:DiskList="getDiskList"></CreatingStoragePanel>
 
 		<!-- Modal-Card Body End -->
 
@@ -97,22 +92,22 @@
 </template>
 
 <script>
-import LottieAnimation      from "lottie-web-vue";
-import smoothReflow         from 'vue-smooth-reflow'
-import delay                from 'lodash/delay';
-import max                  from 'lodash/max';
-import {mixin}              from '@/mixins/mixin';
-import DriveItem            from '../DriveManagerPanel/DriveItem.vue'
-import StorageItem          from './StorageItem.vue'
-import Popper               from 'vue-popperjs';
-import StorageCombination   from "./StorageCombination.vue";
-import cToolTip             from '@/components/basicComponents/tooltip/tooltip.vue';
-import events               from '@/events/events';
-import MergeStorages        from '@/components/MergeManagerPanel/MergeManagerPanel.vue';
+import LottieAnimation from "lottie-web-vue";
+import smoothReflow from 'vue-smooth-reflow'
+import delay from 'lodash/delay';
+import max from 'lodash/max';
+import { mixin } from '@/mixins/mixin';
+import DriveItem from '../DriveManagerPanel/DriveItem.vue'
+import StorageItem from './StorageItem.vue'
+import Popper from 'vue-popperjs';
+import StorageCombination from "./StorageCombination.vue";
+import cToolTip from '@/components/basicComponents/tooltip/tooltip.vue';
+import events from '@/events/events';
+import MergeStorages from '@/components/MergeManagerPanel/MergeManagerPanel.vue';
 import CreatingStoragePanel from './CreatingStoragePanel.vue';
 import { MIRCO_APP_ACTION_ENUM } from "@/const";
-import  maxBy  					 from 'lodash/maxBy';
-import  filter  				 from 'lodash/filter';
+import maxBy from 'lodash/maxBy';
+import filter from 'lodash/filter';
 
 export default {
 	name: "storage-manager-panel",
@@ -250,7 +245,7 @@ export default {
 						let children = systemStorage.children;
 						const maxA = maxBy(children, function (o) {
 							// WARN: Overflow will occur during conversion if left unchanged
-							return o.size/1024/1024;
+							return o.size / 1024 / 1024;
 						}).size;
 						const filtered = filter(systemStorage.children, item => item.size === maxA);
 						systemStorage.children = filtered;
@@ -417,7 +412,7 @@ export default {
 		},
 
 		// close localstorage
-		close(){
+		close() {
 			this.$messageBus('apps_close', 'icewhale_localstorage');
 			this.$messageBus("mircoapp_communicate", {
 				action: MIRCO_APP_ACTION_ENUM.CLOSE,
@@ -427,10 +422,10 @@ export default {
 		},
 	},
 	sockets: {
-		"local-storage:disk:removed"(res){
+		"local-storage:disk:removed"(res) {
 			this.getDiskList()
 		},
-		"local-storage:disk:added"(res){
+		"local-storage:disk:added"(res) {
 			this.getDiskList()
 		},
 	},
@@ -439,6 +434,30 @@ export default {
 
 
 <style lang="scss" scoped>
+.b-tabs {
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+
+	::v-deep .tab-content {
+		flex-grow: 1;
+		height: 100%;
+
+		.tab-item {
+			display: flex;
+			flex-direction: column;
+			flex-grow: 1;
+			flex-shrink: 1;
+			overflow: auto;
+
+			.combination-box {
+				flex-grow: 1;
+				flex-shrink: 1;
+			}
+		}
+	}
+}
+
 .create-container {
 	height: 2.25rem;
 	position: absolute;
@@ -472,7 +491,7 @@ export default {
 	border-radius: 0.5rem;
 }
 
-._min-h-393px{
+._min-h-393px {
 	min-height: 393px;
 }
 </style>
@@ -515,8 +534,9 @@ export default {
 		font-feature-settings: 'pnum' on, 'lnum' on;
 	}
 }
-.max-height{
+
+.max-height {
 	max-height: 60vh;
-	overflow-y: auto;
+	overflow-y: hidden;
 }
 </style>

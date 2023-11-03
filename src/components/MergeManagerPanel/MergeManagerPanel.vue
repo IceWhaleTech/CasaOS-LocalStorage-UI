@@ -9,8 +9,10 @@
  * Copyright (c) 2022 by IceWhale, All Rights Reserved.
 -->
 <template>
-	<div style="height: 80%">
-		<section v-if="currentStep === 0" class="notification is-overlay mb-0 pr-0 pl-0 pt-2 pb-3 non-backgroud">
+	<div class="is-flex is-flex-direction-column is-flex-grow-1 is-flex-shrink-1" style="overflow-y: hidden;">
+		<section v-if="currentStep === 0"
+			class="is-flex-grow-1 is-flex-shrink-1 notification is-overlay mb-0 pr-0 pl-0 pt-2 pb-3 non-backgroud"
+			style="overflow-y: overlay;max-height:60vh;">
 			<div class="_is-normal _has-text-gray-600 mb-4">
 				{{
 					$t("All the checked Storage will be merged into {CasaOS} HD.", {
@@ -59,7 +61,7 @@
 		</section>
 
 		<div v-if="currentStep === 0"
-			class="_has-background-red-default _has-text-white _is-normal is-flex is-align-items-center mb-4 pt-2 pb-2 _radius-line">
+			class="is-flex-shrink-0 _has-background-red-default _has-text-white _is-normal is-flex is-align-items-center mb-4 pt-2 pb-2 _radius-line">
 			<div class="is-flex left ml-3 mr-2 is-align-items-center">
 				<b-icon custom-size="casa-19px" icon="warning-solid" pack="casa"></b-icon>
 			</div>
@@ -69,7 +71,8 @@
 			}}
 		</div>
 
-		<section v-if="currentStep > 0" class="notification is-overlay mb-0 pr-0 pl-0 pt-5 pb-4 non-backgroud">
+		<section v-if="currentStep > 0"
+			class="is-flex-grow-1 is-flex-shrink-0 notification is-overlay mb-0 pr-0 pl-0 pt-5 pb-4 non-backgroud">
 			<div v-if="currentStep === 1" class="is-flex is-align-items-center _is-normal">
 				{{
 					$t(
@@ -100,7 +103,7 @@
 			</div>
 		</section>
 
-		<footer class="is-flex is-align-items-center mb-4">
+		<footer class="is-flex-grow-0 is-flex-shrink-0 is-flex is-align-items-center mb-4">
 			<div class="is-flex-grow-1">
 				<a v-show="currentStep === 0"
 					href="https://docs.zimaboard.com/docs/Small-body-Big-applications-OMV-install.html" target="_blank">{{
@@ -111,10 +114,11 @@
 					class="_has-background-gray-100" expaned rounded @click="currentStep = 0" />
 			</div>
 			<div>
-				<b-button v-show="currentStep !== 1" :disabled="disableMergeButton" :label="$t(affirm)"
-						:loading="isLoading" expaned rounded type="is-primary" @click="submitProxy" />
+				<b-button v-show="currentStep !== 1" :disabled="disableMergeButton" :label="$t(affirm)" :loading="isLoading"
+					expaned rounded type="is-primary" @click="submitProxy" />
 				<b-button v-show="currentStep === 1" :label="$t(affirm)" :loading="isLoading"
-					class="_has-background-red-default is-rounded _has-text-white" expaned rounded @click="currentStep = 2" />
+					class="_has-background-red-default is-rounded _has-text-white" expaned rounded
+					@click="currentStep = 2" />
 			</div>
 		</footer>
 	</div>
