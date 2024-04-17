@@ -36,6 +36,20 @@ jobs:
                 version: 8.6
                 run_install: false
 
+            - name: Get pnpm store directory
+              shell: bash
+              run: |
+                echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
+
+            - name: '缓存 Cache'
+              uses: actions/cache@v3
+              id: cache-dependencies
+              with:
+                path: ${{ env.STORE_PATH }}
+                key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+                restore-keys: |
+                  ${{ runner.os }}-pnpm-store-
+
             - name: '读取当前版本号 Read the current version number'
               id: version
               uses: zhanghengxin/reading-a-file-of-JSON@ice
@@ -53,8 +67,8 @@ jobs:
                   echo github ${{ github }}
                   echo github.sha ${{ github.sha }}
                   echo env.VERSION ${{ steps.get_version.outputs.VERSION }}
-            - run: yarn
-            - run: yarn build
+            - run: pnpm install
+            - run: pnpm build
             - run: |
                   tar -zcvf linux-all-icewhale-localstorage-ui-${{ steps.get_version.outputs.VERSION }}.tar.gz build
             - name: '更新 Update release'
